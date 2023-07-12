@@ -1,0 +1,1 @@
+9999999999{"name": "sympy", "version": "1.11.1", "summary": "Computer algebra system (CAS) in Python", "platform": null, "requires_dist": ["mpmath (>=0.19)"], "requires_python": ">=3.8", "files": [], "_cache_version": "1.0.0"}

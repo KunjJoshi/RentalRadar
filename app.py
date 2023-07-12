@@ -1,0 +1,52 @@
+from flask import Flask, render_template, request
+from main import get_property_for_sale,collect_research_params,collect_property_data
+import webbrowser
+from io import StringIO
+import pandas as pd
+
+app = Flask(__name__)
+
+
+@app.route('/', methods=['GET'])
+def index():
+  return render_template('index.html')
+
+
+@app.route('/listings', methods=['POST'])
+def listings():
+  zipcode = request.form['zipcode']
+  print(zipcode)
+  downpayment=request.form['downpayment']
+  interest=request.form['interest']
+  propertytax=request.form['propertytax']
+  expense=request.form['expense']
+
+  research=collect_research_params(zipcode,downpayment,interest,propertytax,expense)
+  results=collect_property_data(research=research)
+  return render_template('listings.html',result=results)
+
+@app.route('/parameters',methods=['POST'])
+def parameters():
+  zipcode=request.form['zipcode']
+  return render_template('parameters.html',zip=zipcode)
+
+@app.route('/analyse',methods=['POST'])
+def analyse():
+  prd=request.form['period']
+  property={}
+  property['beds']=request.form['beds']
+  property['baths']=request.form['baths']
+  property['protax']=request.form['protax']
+  property['rent']=request.form['rent']
+  property['address']=request.form['address']
+  property['list_price']=request.form['list_price']
+  property['sqft']=request.form['sqft']
+  property['amortized_over']='30 years'
+
+  return render_template('analysed.html',properties=property)
+
+
+if __name__ == '__main__':
+  app.run(host='127.0.0.1',port='5000',debug=True)
+
+webbrowser.open('http://127.0.0.1:5000')

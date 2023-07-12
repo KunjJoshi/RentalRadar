@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Property Details</title>
+</head>
+<body>
+    <h2>Property Details for {{zip}}</h2>
+    <form action="/listings" method="POST">
+
+        <input type="hidden" name="zipcode" value="{{zip}}">
+        <label>Percentage of Down Payment:</label>
+        <input type="number" id="down-payment" name="downpayment" required><br><br>
+        
+        <label>Current Mortgage Interest Rate:</label>
+        <input type="number" id="interest-rate" name="interest" step="0.01" required><br><br>
+        
+        <label>Property Tax Rate:</label>
+        <input type="number" id="property-tax" name="propertytax" step="0.01" required><br><br>
+        
+        <label>Average Monthly Expenses:</label>
+        <input type="number" id="monthly-expenses" name="expense" required><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

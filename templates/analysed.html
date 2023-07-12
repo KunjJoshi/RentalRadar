@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Property Analysis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      text-align: left;
+    }
+    
+    .schedule {
+      margin-bottom: 40px;
+    }
+    
+    .schedule th, .schedule td {
+      padding: 8px;
+      text-align: center;
+    }
+    
+    .schedule th {
+      background-color: #f2f2f2;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <h1>Property Analysis</h1>
+  
+  <div>
+    <h2>Property Information</h2>
+    <p><strong>Rent Estimate:</strong> {{ properties.rent }}</p>
+    <p><strong>Listed Price:</strong> {{ properties.list_price }}</p>
+    <p><strong>Address:</strong> {{ properties.address }}</p>
+    <p><strong>Beds:</strong> {{ properties.beds }}</p>
+    <p><strong>Baths:</strong> {{ properties.baths }}</p>
+    <p><strong>SqFt:</strong> {{ properties.sqft }}</p>
+    <p><strong>Property Tax:</strong> {{ properties.protax }}</p>
+  </div>
+  
+  <div class="schedule">
+    <h2>Amortization Schedule</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Period</th>
+          <th>Interest</th>
+          <th>Principal</th>
+          <th>Monthly Payment</th>
+          <th>Outstanding Balance</th>
+          <th>Total Interest</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for periods in properties.period %}
+        {% for inte in properties.interest%}
+        {% for princ in properties.principal %}
+        {% for ob in properties.outstanding_balance %}
+        {% for ti in properties.total_interest %}
+        <tr>
+          <td>{{periods}}</td>
+          <td>{{inte}}</td>
+          <td>{{princ}}</td>
+          <td>{{ob}}</td>
+          <td>{{ti}}</td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+        {% endfor %}
+        {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  
+</body>
+</html>

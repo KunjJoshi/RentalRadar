@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Property Listings</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Property Listings</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>SqFt</th>
+        <th>Price</th>
+        <th># Beds</th>
+        <th># Baths</th>
+        <th>Rent Estimate</th> <!-- New column header -->
+        <th>Analyse</th> <!-- New column header -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for res in result %}
+      <tr>
+        <td>{{ res['address_line'] }}</td>
+        <td>{{ res['sqft'] }}</td>
+        <td>{{ res['list_price'] }}</td>
+        <td>{{ res['beds'] }}</td>
+        <td>{{ res['baths_full'] }}</td>
+        <td>{{ res['rent_estimate'] }}</td> <!-- New column value -->
+        <td>
+          <form action="/analyse" method="POST">
+            <input type="hidden" name="id" value="{{ res['index'] }}">
+            <input type="hidden" name="address" value="{{ res['address_line']}}"> 
+            <input type="hidden" name="sqft" value="{{ res['sqft']}}">
+            <input type="hidden" name="beds" value="{{ res['beds']}}">
+            <input type="hidden" name="baths" value="{{ res['baths_full']}}">
+            <input type="hidden" name="rent" value="{{ res['rent_estimate']}}">
+            <input type="hidden" name="list_price" value="{{ res['list_price']}}">
+            <input type="hidden" name="protax" value="{{ res['property_tax']}}">
+            <input type="hidden" name="period" value="{{ res['period']}}">
+            <input type="hidden" name="interest" value="{{ res['interest']}}">
+            <input type="hidden" name="principal" value="{{ res['principal']}}">
+            <input type="hidden" name="monthly_payment" value="{{ res['monthly_payment']}}">
+            <input type="hidden" name="outstanding_balance" value="{{ res['outstanding_balance']}}">
+            <input type="hidden" name="total_interest" value="{{ res['total_interest']}}"><!-- Replace fixed_value with the desired value -->
+            <button type="submit">Analyse</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>
