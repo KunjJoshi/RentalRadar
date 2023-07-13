@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from main import get_property_for_sale,collect_research_params,collect_property_data
+from main import get_property_for_sale,collect_research_params,collect_property_data,conv_str_to_lst
 import webbrowser
 from io import StringIO
 import pandas as pd
@@ -33,6 +33,12 @@ def parameters():
 @app.route('/analyse',methods=['POST'])
 def analyse():
   prd=request.form['period']
+  period=conv_str_to_lst(prd)
+  interest=conv_str_to_lst(request.form['interest'])
+  principal=conv_str_to_lst(request.form['principal'])
+  monthly_payment=conv_str_to_lst(request.form['monthly_payment'])
+  outstanding_balance=conv_str_to_lst(request.form['outstanding_balance'])
+  total_interest=conv_str_to_lst(request.form['total_interest'])
   property={}
   property['beds']=request.form['beds']
   property['baths']=request.form['baths']
@@ -42,7 +48,12 @@ def analyse():
   property['list_price']=request.form['list_price']
   property['sqft']=request.form['sqft']
   property['amortized_over']='30 years'
-
+  property['period']=period
+  property['interest']=interest
+  property['principal']=principal
+  property['monthly_payment']=monthly_payment
+  property['total_interest']=total_interest
+  property['outstanding_balance']=outstanding_balance
   return render_template('analysed.html',properties=property)
 
 

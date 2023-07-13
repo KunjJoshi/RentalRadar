@@ -237,7 +237,19 @@ def print_rental_potentials():
     rental_estimate = property['rent_estimate']
     print("{:<5} {:<24} {:<8} {:<6} {:<6} ${:<10} ${:<16}".format(index, address, sqft, beds, baths_full, list_price, rental_estimate))
 
-#def conv_str_to_lst(string):
+def conv_str_to_lst(string):
+   noofspaces=string.count(' ')
+   for i in range(noofspaces):
+      string=string.replace(' ','')
+   noofbrackets=string.count('[')
+   for i in range(noofbrackets):
+      string=string.replace('[','')
+   noofbrackets=string.count(']')
+   for i in range(noofbrackets):
+      string=string.replace(']','')
+   newlist=string.split(',')
+   print(len(newlist))
+   return newlist
 def plot_expense_vs_income(index):
   print(index, " Plot function is not ready yet!")
   

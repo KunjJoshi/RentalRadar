@@ -59,6 +59,7 @@
     <p><strong>Baths:</strong> {{ properties.baths }}</p>
     <p><strong>SqFt:</strong> {{ properties.sqft }}</p>
     <p><strong>Property Tax:</strong> {{ properties.protax }}</p>
+    <p><strong>Amortized Over:</strong> {{ properties.amortized_over }}</p>
   </div>
   
   <div class="schedule">
@@ -75,22 +76,15 @@
         </tr>
       </thead>
       <tbody>
-        {% for periods in properties.period %}
-        {% for inte in properties.interest%}
-        {% for princ in properties.principal %}
-        {% for ob in properties.outstanding_balance %}
-        {% for ti in properties.total_interest %}
+        {% for ind in range(properties.period|length) %}
         <tr>
-          <td>{{periods}}</td>
-          <td>{{inte}}</td>
-          <td>{{princ}}</td>
-          <td>{{ob}}</td>
-          <td>{{ti}}</td>
+          <td>{{properties.period[ind]}}</td>
+          <td>{{properties.interest[ind]}}</td>
+          <td>{{properties.principal[ind]}}</td>
+          <td>{{properties.monthly_payment[ind]}}</td>
+          <td>{{properties.outstanding_balance[ind]}}</td>
+          <td>{{properties.total_interest[ind]}}</td>
         </tr>
-        {% endfor %}
-        {% endfor %}
-        {% endfor %}
-        {% endfor %}
         {% endfor %}
       </tbody>
     </table>
