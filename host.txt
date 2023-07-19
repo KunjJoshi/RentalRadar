@@ -1,0 +1,65 @@
+  GNU nano 6.2                                                                            rewardwise.ini                                                                                      
+[uwsgi]
+http = :8000
+
+chdir = /var/www/rewardwise.co/html/RewardWiseBackendServer
+
+module = RewardWiseServer.wsgi:application
+
+virtualenv = /var/www/rewardwise.co/html/RewardWiseBackendServer/RewardWiseEnv
+
+master = true
+
+processes = 5
+
+
+
+
+
+
+
+  GNU nano 6.2                                                                             uwsgi.service                                                                                      
+[Unit]
+Description=uWSGI Emperor service
+After=syslog.target
+
+[Service]
+ExecStart=/usr/local/bin/uwsgi --emperor /etc/uwsgi/sites
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+
+
+
+server {
+
+        root /var/www/rewardwise.co/html/RewardWiseBackendServer;
+
+        server_name internals.rewardwise.co;
+
+
+        location / {
+
+          proxy_set_header        Host $host;
+          proxy_set_header        X-Real-IP $remote_addr;
+          proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header        X-Forwarded-Proto $scheme;
+
+          proxy_pass          http://localhost:8000;
+          proxy_read_timeout  90;
+
+          proxy_redirect      http://localhost:8000 http:/internals.rewardwise.co/;
+
+        }
+        location /static/ {
+        alias /var/www/rewardwise.co/html/RewardWiseBackendServer/static/;
+        }
