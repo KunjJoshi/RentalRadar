@@ -1,1 +1,0 @@
-9999999999{"name": "nvidia-nvtx-cu11", "version": "11.7.91", "summary": "NVIDIA Tools Extension", "platform": null, "requires_dist": ["setuptools", "wheel"], "requires_python": ">=3", "files": [], "_cache_version": "1.0.0"}

@@ -1,1 +1,0 @@
-9999999999{"name": "torch", "version": "2.0.1", "summary": "Tensors and Dynamic neural networks in Python with strong GPU acceleration", "platform": null, "requires_dist": ["filelock", "typing-extensions", "sympy", "networkx", "jinja2", "opt-einsum (>=3.3) ; extra == 'opt-einsum'"], "requires_python": ">=3.8.0", "files": [], "_cache_version": "1.0.0"}
