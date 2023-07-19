@@ -1,0 +1,101 @@
+name: Flask CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+      - "feat/*"
+      - "fix/*"
+  pull_request:
+    branches:
+      - master
+      - "feat/*"
+      - "fix/*"
+
+jobs:
+  build-master:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.x"
+          cache: "pip" # caching pip dependencies
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      # - name: Run Migrations
+      #   run: python manage.py
+  deploy-master:
+    runs-on: ubuntu-latest
+    needs: build-master
+    if: github.ref == 'refs/heads/master' && github.event_name != 'schedule'
+    steps:
+      - name: Checkout code
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /var/www/rewardwise.co/html/RewardWiseBackendServer
+            git pull origin master
+            pip install -r requirements.txt
+            sudo systemctl restart uwsgi
+  # command for server restart
+
+  # build-branches:
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/feat' || github.ref == 'refs/heads/fix'
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v3
+  #       with:
+  #         python-version: "3.x"
+  #     - name: Install Dependencies
+  #       run: |
+  #         python -m pip install --upgrade pip
+  #         pip install -r requirements.txt
+  #     - name: Run Migrations
+  #       run: python manage.py runserver
+
+  # deploy-branches:
+  #   runs-on: ubuntu-latest
+  #   needs: build-branches
+  #   if: (github.ref == 'refs/heads/feat' || github.ref == 'refs/heads/fix') && github.event_name != 'schedule'
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+  #     - name: Deploy
+  #       run: |
+  #         # Run your deployment commands here
+
+  # create_pr:
+  #   runs-on: ubuntu-latest
+  #   needs: deploy-branches
+  #   steps:
+  #     - uses: actions/github-script@v4
+  #       with:
+  #         script: |
+  #           const title = 'Your Pull Request Title';
+  #           const body = 'Your Pull Request Description';
+  #           const head = 'your-branch-name';
+  #           const base = 'master';
+  #           const { data: pullRequest } = await github.pulls.create({
+  #             owner: context.repo.owner,
+  #             repo: context.repo.repo,
+  #             title,
+  #             body,
+  #             head,
+  #             base,
+  #           });
+  #           console.log(pullRequest.html_url);
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
