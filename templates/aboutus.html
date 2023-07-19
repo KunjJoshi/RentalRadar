@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>About Us - Rental Radar</title>
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='RentalRadar.jpeg') }}">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+    }
+
+    .navbar {
+      background-color: #007bff; /* Navbar background color */
+      color: #ffffff; /* Text color */
+      display: flex;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .navbar-logo {
+      width: 50px; /* Logo size */
+      height: 50px; /* Logo size */
+      margin-right: 10px; /* Spacing between logo and buttons */
+    }
+
+    .navbar-title {
+      font-weight: bold;
+      font-size: 20px;
+      margin-right: auto;
+    }
+
+    .navbar-link {
+      display: inline-block;
+      padding: 10px 15px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #007bff; /* Button background color */
+      color: #ffffff; /* Button text color */
+      text-decoration: none;
+    }
+
+    .navbar-link:hover {
+      background-color: #0056b3; /* Button background color on hover */
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 20px;
+    }
+
+    .card {
+      width: 300px;
+      padding: 20px;
+      margin: 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-image {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .card-image img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .card-name {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .card-description {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <img class="navbar-logo" src="{{ url_for('static', filename='RentalRadar.jpeg') }}" alt="Rental Radar Logo">
+    <a href="/" class="navbar-link">Home</a>
+    <a href="/about-us" class="navbar-link">About Us</a>
+    <a href="/contact-us" class="navbar-link">Contact Us</a>
+    <a href="/mission" class="navbar-link">Mission</a>
+    <a href="/subscribe" class="navbar-link">Subscribe</a>
+  </div>
+
+  <h1>About Us</h1>
+
+  <p>Rental Radar is a leading platform that provides property listings and analysis for rental properties. We aim to simplify the process of finding and analyzing rental properties to help individuals make informed decisions.</p>
+
+  <h2>Meet Our Founders</h2>
+
+  <div class="card-container">
+    <div class="card">
+      <div class="card-image">
+        <img src="{{ url_for('static', filename='kunj_joshi.jpg') }}" alt="Kunj Joshi">
+      </div>
+      <h3 class="card-name">Kunj Joshi</h3>
+      <p class="card-description">Kunj is a passionate real estate enthusiast with expertise in property analysis and investment strategies.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-image">
+        <img src="{{ url_for('static', filename='panth_shah.jpg') }}" alt="Panth Shah">
+      </div>
+      <h3 class="card-name">Panth Shah</h3>
+      <p class="card-description">Panth is an experienced real estate professional who specializes in market analysis and property valuation.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-image">
+        <img src="{{ url_for('static', filename='anay_shah.jpg') }}" alt="Anay Shah">
+      </div>
+      <h3 class="card-name">Anay Shah</h3>
+      <p class="card-description">Anay is a data-driven individual who leverages analytics and technology to provide accurate property insights.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-image">
+        <img src="{{ url_for('static', filename='bhavin_shah.jpg') }}" alt="Bhavin Shah">
+      </div>
+      <h3 class="card-name">Bhavin Shah</h3>
+      <p class="card-description">Bhavin is a seasoned entrepreneur who brings strategic vision and innovation to Rental Radar's operations.</p>
+    </div>
+  </div>
+
+</body>
+</html>

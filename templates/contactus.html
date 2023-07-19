@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Property Details</title>
+  <title>Contact Us - Rental Radar</title>
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='RentalRadar.jpeg') }}">
   <style>
     body {
@@ -9,13 +9,14 @@
       background-color: #f2f2f2;
       margin: 0;
     }
-    
-    h2 {
-      color: #333333;
+
+    .heading {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      color: #000;
       text-align: center;
       margin-top: 30px;
     }
-
+    
     .navbar {
       background-color: #007bff;
       color: #ffffff;
@@ -68,12 +69,18 @@
       margin-bottom: 10px;
     }
     
-    input[type="number"] {
+    input[type="text"],
+    input[type="email"],
+    textarea {
       width: 100%;
       padding: 10px;
       font-size: 16px;
       border: 1px solid #cccccc;
       border-radius: 4px;
+    }
+    
+    textarea {
+      resize: vertical;
     }
     
     input[type="submit"] {
@@ -89,41 +96,42 @@
       cursor: pointer;
     }
     
-    .heading {
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-      color: #000;
-      text-align: center;
-      margin-top: 30px;
-    }
     input[type="submit"]:hover {
       background-color: #0056b3;
     }
   </style>
 </head>
-<div class="navbar">
-  <img class="navbar-logo" src="{{ url_for('static', filename='RentalRadar.jpeg') }}" alt="Rental Radar Logo">
-  <h1 class="navbar-title">Rental Radar</h1>
-  <a href="/about-us" class="navbar-button">About Us</a>
-  <a href="/contact-us" class="navbar-button">Contact Us</a>
-  <a href="/mission" class="navbar-button">Mission</a>
-  <a href="/subscribe" class="navbar-button">Subscribe</a>
-</div>
+<body>
+  <div class="navbar">
+    <img class="navbar-logo" src="{{ url_for('static', filename='RentalRadar.jpeg') }}" alt="Rental Radar Logo">
+    <h1 class="navbar-title">Rental Radar</h1>
+    <a href="/about-us" class="navbar-button">About Us</a>
+    <a href="/contact-us" class="navbar-button">Contact Us</a>
+    <a href="/mission" class="navbar-button">Mission</a>
+    <a href="/subscribe" class="navbar-button">Subscribe</a>
+  </div>
 
-  <h2>Property Details for {{zip}}</h2>
-  <form action="/listings" method="POST">
-    <input type="hidden" name="zipcode" value="{{zip}}">
-    <label>Percentage of Down Payment:</label>
-    <input type="number" id="down-payment" name="downpayment" required><br><br>
-    <label>Current Mortgage Interest Rate:</label>
-    <input type="number" id="interest-rate" name="interest" step="0.01" required><br><br>
-    <label>Property Tax Rate:</label>
-    <input type="number" id="property-tax" name="propertytax" step="0.01" required><br><br>
-    <label>Average Monthly Expenses:</label>
-    <input type="number" id="monthly-expenses" name="expense" required><br><br>
+  <h1 class="heading">Contact Us</h1>
+  
+  <div class="contact-info">
+    <p><strong>Location:</strong> 2913, W Castle Pines Ter, Dublin, CA, 94568</p>
+    <p><strong>Phone:</strong> +917096582792</p>
+    <p><strong>Email:</strong> shyam@greenvibellc.com</p>
+  </div>
+
+  <h3 class="heading">Get in Touch</h3>
+
+  <form action="/send-email" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="enquiry">Enquiry:</label>
+    <textarea id="enquiry" name="enquiry" rows="5" required></textarea>
+
     <input type="submit" value="Submit">
   </form>
-  
-<h4 class="heading"> Obtaining Data about the listings might take some time. Please hold tight</h4>
 </body>
-
 </html>

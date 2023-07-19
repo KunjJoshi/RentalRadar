@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>Property Analysis</title>
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='RentalRadar.jpeg') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,83 +14,278 @@
     
     h1 {
       color: #333;
-      margin-bottom: 20px;
+      text-align: center;
+      margin-top: 30px;
     }
     
-    table {
+    h3 {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .navbar {
+      background-color: #007bff;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      margin-bottom: 30px;
+    }
+
+    .navbar-logo {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .navbar-title {
+      font-weight: bold;
+      font-size: 20px;
+      margin-right: auto;
+    }
+
+    .navbar-button {
+      display: inline-block;
+      padding: 10px 15px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #007bff;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .navbar-button:hover {
+      background-color: #0056b3;
+    }
+
+    .property-info {
+      margin-bottom: 30px;
+    }
+
+    .property-info-label {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .property-info-value {
+      margin-bottom: 10px;
+    }
+
+    .property-image {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .property-image img {
+      width: 500px;
+      height: 300px;
+      object-fit: initial;
+    }
+
+    .property-details-table {
+      margin-bottom: 30px;
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 20px;
     }
-    
-    th, td {
+
+    .property-details-table th,
+    .property-details-table td {
       border: 1px solid #ddd;
       padding: 10px;
     }
-    
-    th {
+
+    .property-details-table th {
       background-color: #f2f2f2;
       font-weight: bold;
       text-align: left;
     }
-    
-    .schedule {
-      margin-bottom: 40px;
+
+    .graph-container {
+      margin-bottom: 30px;
     }
-    
-    .schedule th, .schedule td {
-      padding: 8px;
-      text-align: center;
+
+    .graph {
+      width: 100%;
     }
-    
-    .schedule th {
-      background-color: #f2f2f2;
-      font-weight: normal;
+
+    .get-details-button {
+      display: block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #ffffff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .get-details-button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
+  <div class="navbar">
+    <img class="navbar-logo" src="{{ url_for('static', filename='RentalRadar.jpeg') }}" alt="Rental Radar Logo">
+    <h1 class="navbar-title">Rental Radar</h1>
+    <a href="/about-us" class="navbar-button">About Us</a>
+    <a href="/contact-us" class="navbar-button">Contact Us</a>
+    <a href="/mission" class="navbar-button">Mission</a>
+    <a href="/subscribe" class="navbar-button">Subscribe</a>
+  </div>
+
   <h1>Property Analysis</h1>
   
-  <div>
-    <h2>Property Information</h2>
-    <p><strong>Rent Estimate:</strong> {{ properties.rent }}</p>
-    <p><strong>Listed Price:</strong> {{ properties.list_price }}</p>
-    <p><strong>Address:</strong> {{ properties.address }}</p>
-    <p><strong>Beds:</strong> {{ properties.beds }}</p>
-    <p><strong>Baths:</strong> {{ properties.baths }}</p>
-    <p><strong>SqFt:</strong> {{ properties.sqft }}</p>
-    <p><strong>Property Tax:</strong> {{ properties.protax }}</p>
-    <p><strong>Amortized Over:</strong> {{ properties.amortized_over }}</p>
-  </div>
-  
-  <div class="schedule">
-    <h2>Amortization Schedule</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Period</th>
-          <th>Interest</th>
-          <th>Principal</th>
-          <th>Monthly Payment</th>
-          <th>Outstanding Balance</th>
-          <th>Total Interest</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for ind in range(properties.period|length) %}
-        <tr>
-          <td>{{properties.period[ind]}}</td>
-          <td>{{properties.interest[ind]}}</td>
-          <td>{{properties.principal[ind]}}</td>
-          <td>{{properties.monthly_payment[ind]}}</td>
-          <td>{{properties.outstanding_balance[ind]}}</td>
-          <td>{{properties.total_interest[ind]}}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
+  <div class="property-info">
+    <p class="property-info-label">Address:</p>
+    <p class="property-info-value">{{ properties.address }}</p>
+    
+    <p class="property-info-label">Description:</p>
+    <p class="property-info-value">{{ properties.description }}</p>
+    
+    <h3>Property Details</h3>
+    
+    <table class="property-details-table">
+      <tr>
+        <th>Rent</th>
+        <td>{{ properties.rent }} USD</td>
+      </tr>
+      <tr>
+        <th>Beds</th>
+        <td>{{ properties.beds }}</td>
+      </tr>
+      <tr>
+        <th>Baths</th>
+        <td>{{ properties.baths }}</td>
+      </tr>
+      <tr>
+        <th>Property Tax</th>
+        <td>{{ properties.protax }}</td>
+      </tr>
+      <tr>
+        <th>Listed Price</th>
+        <td>{{ properties.list_price }}</td>
+      </tr>
+      <tr>
+        <th>Square Feet Area</th>
+        <td>{{ properties.sqft }} ft2</td>
+      </tr>
+      <tr>
+        <th>Amortized Over</th>
+        <td>{{ properties.amortized_over }}</td>
+      </tr>
     </table>
   </div>
+  
+  <div class="property-image">
+    <img src="{{ properties.image }}" alt="Property Image">
+  </div>
+
+  <div class="graph-container">
+    <h2>Amortization Graphs</h2>
+  
+    <div class="graph">
+      <canvas id="combinedGraph" width="800" height="600"></canvas>
+    </div>
+  </div>
+  <form action="/subscribe">
+    <button  type='submit' class="get-details-button">Get More Details</button>
+  </form>
+
+  
+  <script>
+    // Data for the line graph
+    var period = JSON.parse('{{ properties.period | tojson }}');
+    var interest = JSON.parse('{{ properties.interest | tojson }}');
+    var principal = JSON.parse('{{ properties.principal | tojson }}');
+  
+    // Convert values to percentages
+    interest = convertToPercentage(interest);
+    principal = convertToPercentage(principal);
+  
+    // Chart configuration for the combined graph
+    var combinedChartConfig = createChartConfig('combinedGraph', 'Combined Graph', period, [
+      interest,
+      principal
+    ]);
+  
+    // Create the line graph
+    var combinedGraph = new Chart(document.getElementById('combinedGraph'), combinedChartConfig);
+  
+    // Function to convert values to percentages
+    function convertToPercentage(data) {
+      var max = Math.max(...data);
+      return data.map(function (value) {
+        return (value / max) * 100;
+      });
+    }
+  
+    // Function to create the chart configuration
+    function createChartConfig(canvasId, label, period, data) {
+      return {
+        type: 'line',
+        data: {
+          labels: period,
+          datasets: data.map(function (values, index) {
+            return {
+              label: index === 0 ? 'Interest' : 'Principal',
+              data: values,
+              borderColor: getRandomColor(),
+              backgroundColor: 'rgba(0, 0, 0, 0)',
+              borderWidth: 2,
+              pointRadius: 0,
+            };
+          }),
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              display: true,
+              title: {
+                display: true,
+                text: 'Months',
+              },
+            },
+            y: {
+              display: true,
+              title: {
+                display: true,
+                text: 'Percentage',
+              },
+              ticks: {
+                callback: function (value) {
+                  return value + '%';
+                },
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+            },
+          },
+        },
+      };
+    }
+  
+    // Function to generate a random color
+    function getRandomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+  </script>
   
 </body>
 </html>

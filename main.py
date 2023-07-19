@@ -160,6 +160,12 @@ def collect_property_data(research):
       list_price = listing['list_price']
       if(list_price == None):
           list_price = 0
+      desc=listing['description']['text']
+      if desc==None:
+         desc=''
+      img_url=listing['primary_photo']['href']
+      if img_url==None:
+         img_url='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png'
       address_line = get_address_line(address, city, state_code, postal_code)
       #print(f"List price: {list_price}, Down payment: {down_payment}, Interest rate: {int_rate}")
       loan_amount = list_price - (list_price%down_payment)
@@ -205,7 +211,9 @@ def collect_property_data(research):
           "outstanding_balance":ou_ba,
           "total_interest":to_in,
           "property_tax": prop_tax,
-          "monthly_exp": monthly_exp
+          "monthly_exp": monthly_exp,
+          'description':desc,
+          'image_url':img_url
       })
       index += 1
   #print(property_data)
