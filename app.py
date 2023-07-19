@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from Flask import Flask, render_template, request
 from main import get_property_for_sale,collect_research_params,collect_property_data,conv_str_to_lst
 import webbrowser
 from io import StringIO
