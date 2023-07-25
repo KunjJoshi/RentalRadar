@@ -31,13 +31,11 @@ django-filter==2.1.0
 django-rest-swagger==2.2.0
 django-storages==1.13.2
 djangorestframework==3.13.1
-djangorestframework-jwt==1.11.0
-djangorestframework-simplejwt==4.3.0
+djangorestframework-jwt
+djangorestframework-simplejwt
 dnspython==2.3.0
 eventlet==0.33.3
 exceptiongroup==1.1.0
-fastapi==0.92.0
-fastapi-login==1.8.3
 Flask==2.2.2
 fonttools==4.40.0
 greenlet==2.0.2
@@ -70,7 +68,7 @@ pycparser==2.21
 pycryptodome==3.17
 pycryptodomex==3.17
 pydantic==1.10.7
-PyJWT==1.7.1
+PyJWT
 pynput==1.7.6
 pyparsing==3.1.0
 pypng==0.20220715.0
