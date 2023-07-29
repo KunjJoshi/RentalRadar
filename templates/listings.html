@@ -98,6 +98,7 @@
   <table>
     <thead>
       <tr>
+        <th>House</th>
         <th>Address</th>
         <th>SqFt</th>
         <th>Price</th>
@@ -110,12 +111,13 @@
     <tbody>
       {% for res in result %}
       <tr>
+        <td><img src="{{res ['image_url'] }}" alt="Property Image"></td>
         <td><strong>{{ res['address_line'] }}</strong></td>
         <td>{{ res['sqft'] }}</td>
-        <td>{{ res['list_price'] }}</td>
+        <td>${{ res['list_price'] }}</td>
         <td>{{ res['beds'] }}</td>
         <td>{{ res['baths_full'] }}</td>
-        <td>{{ res['rent_estimate'] }}</td>
+        <td>${{ res['rent_estimate'] }}</td>
         <td>
           <form action="/analyse" method="POST">
             <input type="hidden" name="id" value="{{ res['index'] }}">
@@ -126,14 +128,18 @@
             <input type="hidden" name="rent" value="{{ res['rent_estimate']}}">
             <input type="hidden" name="list_price" value="{{ res['list_price']}}">
             <input type="hidden" name="protax" value="{{ res['property_tax']}}">
-            <input type="hidden" name="period" value="{{ res['period']}}">
-            <input type="hidden" name="interest" value="{{ res['interest']}}">
-            <input type="hidden" name="principal" value="{{ res['principal']}}">
-            <input type="hidden" name="monthly_payment" value="{{ res['monthly_payment']}}">
-            <input type="hidden" name="outstanding_balance" value="{{ res['outstanding_balance']}}">
-            <input type="hidden" name="total_interest" value="{{ res['total_interest']}}">
             <input type="hidden" name="description" value="{{ res['description']}}">
             <input type="hidden" name="image" value="{{ res['image_url']}}">
+            <input type="hidden" name="invest_amount" value="{{ res['invest_amount'] }}">
+            <input type="hidden" name="monthly_exp" value="{{ res['monthly_exp'] }}">
+            <input type="hidden" name="years" value="{{ res['years'] }}">
+            <input type="hidden" name="expenses" value="{{ res['expenses'] }}">
+            <input type="hidden" name="income" value="{{ res['income'] }}">
+            <input type="hidden" name="cflow" value="{{ res['cflow'] }}">
+            <input type="hidden" name="rroi" value="{{ res['rroi'] }}">
+            <input type="hidden" name="pval" value="{{ res['pval'] }}">
+            <input type="hidden" name="iroi" value="{{ res['iroi'] }}">
+            <input type="hidden" name="yroi" value="{{ res['yroi'] }}">
             <button type="submit">Analyse</button>
           </form>
         </td>

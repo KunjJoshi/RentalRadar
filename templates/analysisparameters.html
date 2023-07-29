@@ -109,23 +109,29 @@
   <a href="/subscribe" class="navbar-button">Subscribe</a>
 </div>
 
-  <h2>Property Details for {{zip}}</h2>
-  <form action="/listings" method="POST">
-    <input type="hidden" name="zipcode" value="{{zip}}">
-    <label>Percentage of Down Payment:</label>
-    <input type="number" id="down-payment" name="downpayment" required><br><br>
-    <label>Current Mortgage Interest Rate:</label>
-    <input type="number" id="interest-rate" name="interest" step="0.01" required><br><br>
-    <label>Property Tax Rate:</label>
-    <input type="number" id="property-tax" name="propertytax" step="0.01" required><br><br>
-    <label>Average Monthly Expenses:</label>
-    <input type="number" id="monthly-expenses" name="expense" required><br><br>
+  <h2>Please Enter These details for Analysis on House At</h2>
+  <h4 class="heading">{{properties['address'] }}</h4>
+  <form action="/analyse" method="POST">
+    <input type="hidden" name="id" value="{{properties['id'] }}">
+    <input type="hidden" name="beds" value="{{properties['beds'] }}">
+    <input type="hidden" name="baths" value="{{properties['baths'] }}">
+    <input type="hidden" name="protax" value="{{properties['protax'] }}">
+    <input type="hidden" name="rent" value="{{properties['rent'] }}">
+    <input type="hidden" name="address" value="{{properties['address'] }}">
+    <input type="hidden" name="list_price" value="{{properties['list_price'] }}">
+    <input type="hidden" name="sqft" value="{{properties['sqft'] }}">
+    <input type="hidden" name="description" value="{{properties['description'] }}">
+    <input type="hidden" name="image" value="{{properties['image'] }}">
+    <input type="hidden" name="amortized_over" value="{{properties['amortized_over'] }}">
+    <input type="hidden" name="invest_amount" value="{{properties['invest_amount'] }}">
+    <input type="hidden" name="amortization_schedule" value="{{properties['amortization_schedule'] }}">
+    <input type="hidden" name="monthly_exp" value="{{ properties['monthly_exp'] }}">
     <label>Increase % in Expenses:</label>
-    <input type="number" id="incr-exp" name="incr_exp" step="0.01" required><br><br>
+    <input type="number" id="incr-exp" name="incr_exp" required><br><br>
     <label>Increase % in Rent Income:</label>
-    <input type="number" id="incr-inc" name="incr_inc" step="0.01" required><br><br>
+    <input type="number" id="incr-inc" name="incr_inc"  required><br><br>
     <label>Increase % in Property Value:</label>
-    <input type="number" id="incr-val" name="incr_val" step="0.01" required><br><br>
+    <input type="number" id="incr-val" name="incr_val" required><br><br>
     <input type="submit" value="Submit">
   </form>
   

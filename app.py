@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from main import get_property_for_sale,collect_research_params,collect_property_data,conv_str_to_lst
+from main import get_property_for_sale,collect_research_params,collect_property_data,conv_str_to_lst,analyze_property,get_positive_cf
 import webbrowser
 from io import StringIO
 import pandas as pd
@@ -20,9 +20,12 @@ def listings():
   interest=request.form['interest']
   propertytax=request.form['propertytax']
   expense=request.form['expense']
-
+  incr_exp=request.form['incr_exp']
+  incr_inc=request.form['incr_inc']
+  incr_val=request.form['incr_val']
   research=collect_research_params(zipcode,downpayment,interest,propertytax,expense)
-  results=collect_property_data(research=research)
+  results=collect_property_data(research,incr_exp,incr_val,incr_inc)
+  print(results[3]['invest_amount'])
   return render_template('listings.html',result=results)
 
 @app.route('/parameters',methods=['POST'])
@@ -32,14 +35,8 @@ def parameters():
 
 @app.route('/analyse',methods=['POST'])
 def analyse():
-  prd=request.form['period']
-  period=conv_str_to_lst(prd)
-  interest=conv_str_to_lst(request.form['interest'])
-  principal=conv_str_to_lst(request.form['principal'])
-  monthly_payment=conv_str_to_lst(request.form['monthly_payment'])
-  outstanding_balance=conv_str_to_lst(request.form['outstanding_balance'])
-  total_interest=conv_str_to_lst(request.form['total_interest'])
   property={}
+  property['id']=request.form['id']
   property['beds']=request.form['beds']
   property['baths']=request.form['baths']
   property['protax']=request.form['protax']
@@ -50,12 +47,22 @@ def analyse():
   property['description']=request.form['description']
   property['image']=request.form['image']
   property['amortized_over']='30 years'
-  property['period']=period
-  property['interest']=interest
-  property['principal']=principal
-  property['monthly_payment']=monthly_payment
-  property['total_interest']=total_interest
-  property['outstanding_balance']=outstanding_balance
+  property['invest_amount']=request.form['invest_amount']
+  property['monthly_exp']=request.form['monthly_exp']
+  property['years']=conv_str_to_lst(request.form['years'])
+  property['expenses']=conv_str_to_lst(request.form['expenses'])
+  property['income']=conv_str_to_lst(request.form['income'])
+  property['cflow']=conv_str_to_lst(request.form['cflow'])
+  property['iroi']=conv_str_to_lst(request.form['iroi'])
+  property['rroi']=conv_str_to_lst(request.form['rroi'])
+  property['yroi']=conv_str_to_lst(request.form['yroi'])
+  property['pval']=conv_str_to_lst(request.form['pval'])
+  cash_flow_positive=get_positive_cf(property['cflow'])
+  property['cflowpos']=cash_flow_positive
+  #print('Interest',property['iroi'])
+  #print('Yearly',property['yroi'])
+  #print('Rental',property['rroi'])
+  #print(property)
   return render_template('analysed.html',properties=property)
 
 @app.route('/about-us')
@@ -80,6 +87,7 @@ def sendemail():
   email=request.form['email']
   enquiry=request.form['enquiry']
   return render_template('index.html')
+
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0',port='8000',debug=True)

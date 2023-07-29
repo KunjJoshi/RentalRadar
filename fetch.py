@@ -64,5 +64,5 @@ for listing in results:
     price = listing['list_price']
     beds = listing['description']['beds']
     baths = listing['description']['baths']
-    print(f"{address:<32} {sqft:<8} ${price:<10} {beds:<6} {baths:<6}")
+    #print(f"{address:<32} {sqft:<8} ${price:<10} {beds:<6} {baths:<6}")
   

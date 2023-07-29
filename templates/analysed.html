@@ -86,21 +86,37 @@
     }
 
     .property-details-table {
-      margin-bottom: 30px;
-      width: 100%;
+      width: 60%;
+      margin: 0 auto;
       border-collapse: collapse;
+      border: 1px solid #333;
     }
 
-    .property-details-table th,
     .property-details-table td {
-      border: 1px solid #ddd;
+      text-align: center;
+      margin: 30px;
+      font-size: medium;
       padding: 10px;
+      border: 1px solid #333;
+    }
+
+    .property-details-table tr{
+      text-align: center;
+      font-size: medium;
+      padding: 10px;
+      border: 1px solid #333;
     }
 
     .property-details-table th {
-      background-color: #f2f2f2;
+      background-color: #fff;
+      font: inherit;
+      text-align: center;
       font-weight: bold;
-      text-align: left;
+      color: #000;
+      padding: 30px;
+      font-size: medium;
+      padding: 10px;
+      border: 1px solid #333;
     }
 
     .graph-container {
@@ -126,6 +142,38 @@
 
     .get-details-button:hover {
       background-color: #0056b3;
+    }
+    .property-table{
+      width: 60%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      border: 1px solid #333;
+
+    }
+
+    .heading-table{
+      background-color: #007bff;
+      font: inherit;
+      text-align: center;
+      font-weight: bold;
+      color: #fff;
+      padding: 30px;
+      font-size: medium;
+      padding: 10px;
+      border: 1px solid #333;
+    }
+    .row-table{
+      text-align: center;
+      font-size: medium;
+      padding: 10px;
+      border: 1px solid #333;
+    }
+    .column-table{
+      text-align: center;
+      margin: 30px;
+      font-size: medium;
+      padding: 10px;
+      border: 1px solid #333;
     }
   </style>
 </head>
@@ -179,6 +227,10 @@
         <th>Amortized Over</th>
         <td>{{ properties.amortized_over }}</td>
       </tr>
+      <tr>
+        <th>You will Go Cash Flow Positive in </th>
+        <td>{{ properties.cflowpos }} Years</td>
+      </tr>
     </table>
   </div>
   
@@ -186,106 +238,140 @@
     <img src="{{ properties.image }}" alt="Property Image">
   </div>
 
-  <div class="graph-container">
-    <h2>Amortization Graphs</h2>
-  
-    <div class="graph">
-      <canvas id="combinedGraph" width="800" height="600"></canvas>
-    </div>
-  </div>
-  <form action="/subscribe">
-    <button  type='submit' class="get-details-button">Get More Details</button>
-  </form>
+  <div class="table-container blue-heading">
+    <h2 style="text-align: center;">Amortization Table</h2>
 
-  
-  <script>
-    // Data for the line graph
-    var period = JSON.parse('{{ properties.period | tojson }}');
-    var interest = JSON.parse('{{ properties.interest | tojson }}');
-    var principal = JSON.parse('{{ properties.principal | tojson }}');
-  
-    // Convert values to percentages
-    interest = convertToPercentage(interest);
-    principal = convertToPercentage(principal);
-  
-    // Chart configuration for the combined graph
-    var combinedChartConfig = createChartConfig('combinedGraph', 'Combined Graph', period, [
-      interest,
-      principal
-    ]);
-  
-    // Create the line graph
-    var combinedGraph = new Chart(document.getElementById('combinedGraph'), combinedChartConfig);
-  
-    // Function to convert values to percentages
-    function convertToPercentage(data) {
-      var max = Math.max(...data);
-      return data.map(function (value) {
-        return (value / max) * 100;
-      });
-    }
-  
-    // Function to create the chart configuration
-    function createChartConfig(canvasId, label, period, data) {
-      return {
-        type: 'line',
-        data: {
-          labels: period,
-          datasets: data.map(function (values, index) {
-            return {
-              label: index === 0 ? 'Interest' : 'Principal',
-              data: values,
-              borderColor: getRandomColor(),
-              backgroundColor: 'rgba(0, 0, 0, 0)',
-              borderWidth: 2,
-              pointRadius: 0,
-            };
-          }),
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            x: {
-              display: true,
-              title: {
-                display: true,
-                text: 'Months',
-              },
-            },
-            y: {
-              display: true,
-              title: {
-                display: true,
-                text: 'Percentage',
-              },
-              ticks: {
-                callback: function (value) {
-                  return value + '%';
-                },
-              },
-            },
+    <table class="property-table">
+      <tr class="heading-table">
+        <th>Year</th>
+        <th>Expenses</th>
+        <th>Income</th>
+        <th>Cash Flow</th>
+        <th>Rental ROI</th>
+        <th>Income ROI</th>
+        <th>Yearly ROI</th>
+        <th>Property Value</th>
+      </tr>
+      {% for index in range(properties.years | length) %}
+        <tr class="row-table">
+          <td class="column-table">{{ properties.years[index] }}</td>
+          <td class="column-table">{{ properties.expenses[index] }}</td>
+          <td class="column-table">{{ properties.income[index] }}</td>
+          <td class="column-table">{{ properties.cflow[index] }}</td>
+          <td class="column-table">{{ properties.rroi[index] }}</td>
+          <td class="column-table">{{ properties.iroi[index] }}</td>
+          <td class="column-table">{{ properties.yroi[index] }}</td>
+          <td class="column-table">{{ properties.pval[index] }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+<div class="graph-container">
+  <h2>Cash Flow Graph</h2>
+
+  <div class="graph">
+    <canvas id="lineGraph" width="800" height="600"></canvas>
+  </div>
+</div>
+
+<div class="graph-container">
+  <h2>ROI Graph</h2>
+
+  <div class="graph">
+    <canvas id="roiGraph" width="800" height="600"></canvas>
+  </div>
+</div>
+
+<form action="/subscribe">
+  <button type="submit" class="get-details-button">Get More Details</button>
+</form>
+
+<script>
+  // Extract the data from the properties JSON file
+  const yearsData = JSON.parse('{{ properties.years | tojson | safe }}');
+  const cflowData = JSON.parse('{{ properties.cflow | tojson | safe }}');
+  const iroiData = JSON.parse('{{ properties.iroi | tojson | safe }}');
+  const rroiData = JSON.parse('{{ properties.rroi | tojson | safe }}');
+
+  // Create the amortization line graph
+  const lineGraph = new Chart(document.getElementById("lineGraph"), {
+    type: "line",
+    data: {
+      labels: yearsData,
+      datasets: [{
+        label: "Cash Flow",
+        data: cflowData,
+        borderColor: "#007bff",
+        borderWidth: 2, // Adjust the line thickness
+        fill: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          display: true,
+          title: {
+            display: true,
+            text: "Years",
           },
-          plugins: {
-            legend: {
-              display: true,
-              position: 'top',
-            },
+        },
+        y: {
+          display: true,
+          title: {
+            display: true,
+            text: "Cash Flow",
           },
         },
-      };
-    }
-  
-    // Function to generate a random color
-    function getRandomColor() {
-      var letters = '0123456789ABCDEF';
-      var color = '#';
-      for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    }
-  </script>
-  
+      },
+    },
+  });
+
+  // Create the ROI line graph
+  const roiGraph = new Chart(document.getElementById("roiGraph"), {
+    type: "line",
+    data: {
+      labels: yearsData,
+      datasets: [
+        {
+          label: "Income ROI",
+          data: iroiData,
+          borderColor: "#abc941",
+          borderWidth: 2,
+          fill: false,
+        },
+        {
+          label: "Rental ROI",
+          data: rroiData,
+          borderColor: "#e74c3c",
+          borderWidth: 2,
+          fill: false,
+        },
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          display: true,
+          title: {
+            display: true,
+            text: "Years",
+          },
+        },
+        y: {
+          display: true,
+          title: {
+            display: true,
+            text: "ROI",
+          },
+        },
+      },
+    },
+  });
+</script>
 </body>
 </html>
