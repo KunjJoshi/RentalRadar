@@ -1,65 +1,39 @@
-  GNU nano 6.2                                                                            rewardwise.ini                                                                                      
-[uwsgi]
-http = :8000
-
-chdir = /var/www/rewardwise.co/html/RewardWiseBackendServer
-
-module = RewardWiseServer.wsgi:application
-
-virtualenv = /var/www/rewardwise.co/html/RewardWiseBackendServer/RewardWiseEnv
-
-master = true
-
-processes = 5
-
-
-
-
-
-
-
-  GNU nano 6.2                                                                             uwsgi.service                                                                                      
+  GNU nano 6.2                                                                flaskproject.service                                                                          
 [Unit]
-Description=uWSGI Emperor service
-After=syslog.target
+Description=Gunicorn Instance to Serve Rental Radar
+After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/uwsgi --emperor /etc/uwsgi/sites
-Restart=always
-KillSignal=SIGQUIT
-Type=notify
-StandardError=syslog
-NotifyAccess=all
+User=root
+Group=www-data
+WorkingDirectory=/var/www/rentalradar.tech/html/RentalRadar
+Environment="PATH=/var/www/rentalradar.tech/html/RentalRadar/venv/bin"
+ExecStart=/usr/local/bin/gunicorn --workers 6 --threads 2 --timeout 90 --bind 0.0.0.0:8000 wsgi:app
+
 
 [Install]
 WantedBy=multi-user.target
 
 
+server{
 
-
-
-
-
-server {
-
-        root /var/www/rewardwise.co/html/RewardWiseBackendServer;
-
-        server_name internals.rewardwise.co;
-
+        root /var/www/rentalradar.tech/html/RentalRadar;
+        server_name rentalradar.tech www.rentalradar.tech;
 
         location / {
+              proxy_set_header  Host $host;
+              proxy_set_header  X-Real-IP $remote_addr;
+              proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header  X-Forwarded-Proto $scheme;
 
-          proxy_set_header        Host $host;
-          proxy_set_header        X-Real-IP $remote_addr;
-          proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header        X-Forwarded-Proto $scheme;
+              proxy_pass http://0.0.0.0:8000;
+              proxy_read_timeout 90;
 
-          proxy_pass          http://localhost:8000;
-          proxy_read_timeout  90;
+              proxy_redirect http://0.0.0.0:8000 http://rentalradar.tech;
+            }
 
-          proxy_redirect      http://localhost:8000 http:/internals.rewardwise.co/;
-
-        }
         location /static/ {
-        alias /var/www/rewardwise.co/html/RewardWiseBackendServer/static/;
-        }
+               alias /var/www/rentalradar.tech/html/RentalRadar/static/;
+           }
+
+}

@@ -204,6 +204,11 @@ def get_positive_cf(cflist):
          return i+1
    return len(cflist)
 
+def get_positive_rroi(rroilist):
+   for i in range(len(rroilist)):
+      if rroilist[i]>0:
+         return i+1
+   return len(rroilist)
 def analyze_property( incr_exp, incr_inc, incr_val,prop_data):
   yearly_exp = []
   yearly_inc = []
@@ -253,13 +258,13 @@ def analyze_property( incr_exp, incr_inc, incr_val,prop_data):
       #print(f"Year {year}: Expenses: {round(yearly_exp[year], 2)}, Income: {round(yearly_inc[year], 2)}, CF: {round(yearly_cf[year], 2)}, Value: {round(yearly_val[year], 2)}, ROI: {round(yearly_roi[year], 2)} rROI: {yearly_rroi[year]}% iROI: {yearly_iroi[year]}%")
       pdata.append ({
         "Year": year,
-        "Expenses": yearly_exp[year],
-        "Income": yearly_inc[year],
-        "Cash Flow": yearly_cf[year],
-        "Rental ROI": yearly_rroi[year],
-        "Property Value": yearly_val[year],
-        "Yearly ROI": yearly_roi[year],
-        "Investment ROI": yearly_iroi[year]
+        "Expenses": round(yearly_exp[year],2),
+        "Income": round(yearly_inc[year],2),
+        "Cash Flow": round(yearly_cf[year],2),
+        "Rental ROI": round(yearly_rroi[year],2),
+        "Property Value": round(yearly_val[year],2),
+        "Yearly ROI": round(yearly_roi[year],2),
+        "Investment ROI": round(yearly_iroi[year],2)
       })
     #total_exp = row['total_exp']
     #total_inc = row['total_inc']
@@ -275,6 +280,7 @@ def analyze_property( incr_exp, incr_inc, incr_val,prop_data):
 def collect_property_data(research,incr_exp,incr_val,incr_inc):
   index = 0
   #print(research)
+  property_data=[]
   #print(research_params)
   location = research['location']
   #location = input("Enter Location (zipcode/city) for research: ")
@@ -360,6 +366,10 @@ def collect_property_data(research,incr_exp,incr_val,incr_inc):
       prop_data['pval']=list(pData['Property Value'])
       prop_data['yroi']=list(pData['Yearly ROI'])
       prop_data['iroi']=list(pData['Investment ROI'])
+      cpos=get_positive_cf(prop_data['cflow'])
+      prop_data['cflow_positive']=cpos
+      rpos=get_positive_rroi(prop_data['rroi'])
+      prop_data['rroi_positive']=rpos
 
       property_data.append(prop_data)
 

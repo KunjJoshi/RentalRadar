@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from main import get_property_for_sale,collect_research_params,collect_property_data,conv_str_to_lst,analyze_property,get_positive_cf
+from main import get_property_for_sale,collect_research_params,collect_property_data,conv_str_to_lst,analyze_property,get_positive_cf,get_positive_rroi
 import webbrowser
 from io import StringIO
 import pandas as pd
@@ -25,7 +25,6 @@ def listings():
   incr_val=request.form['incr_val']
   research=collect_research_params(zipcode,downpayment,interest,propertytax,expense)
   results=collect_property_data(research,incr_exp,incr_val,incr_inc)
-  print(results[3]['invest_amount'])
   return render_template('listings.html',result=results)
 
 @app.route('/parameters',methods=['POST'])
@@ -49,16 +48,18 @@ def analyse():
   property['amortized_over']='30 years'
   property['invest_amount']=request.form['invest_amount']
   property['monthly_exp']=request.form['monthly_exp']
-  property['years']=conv_str_to_lst(request.form['years'])
-  property['expenses']=conv_str_to_lst(request.form['expenses'])
-  property['income']=conv_str_to_lst(request.form['income'])
-  property['cflow']=conv_str_to_lst(request.form['cflow'])
-  property['iroi']=conv_str_to_lst(request.form['iroi'])
-  property['rroi']=conv_str_to_lst(request.form['rroi'])
-  property['yroi']=conv_str_to_lst(request.form['yroi'])
-  property['pval']=conv_str_to_lst(request.form['pval'])
+  property['years']=conv_str_to_lst(request.form['years'])[1:]
+  property['expenses']=conv_str_to_lst(request.form['expenses'])[1:]
+  property['income']=conv_str_to_lst(request.form['income'])[1:]
+  property['cflow']=conv_str_to_lst(request.form['cflow'])[1:]
+  property['iroi']=conv_str_to_lst(request.form['iroi'])[1:]
+  property['rroi']=conv_str_to_lst(request.form['rroi'])[1:]
+  property['yroi']=conv_str_to_lst(request.form['yroi'])[1:]
+  property['pval']=conv_str_to_lst(request.form['pval'])[1:]
   cash_flow_positive=get_positive_cf(property['cflow'])
   property['cflowpos']=cash_flow_positive
+  roi_pos=get_positive_rroi(property['rroi'])
+  property['rroipos']=roi_pos
   #print('Interest',property['iroi'])
   #print('Yearly',property['yroi'])
   #print('Rental',property['rroi'])

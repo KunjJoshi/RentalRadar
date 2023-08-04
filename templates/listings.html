@@ -104,6 +104,8 @@
         <th>Price</th>
         <th># Beds</th>
         <th># Baths</th>
+        <th>Cash Flow Positive In </th>
+        <th>Rent ROI Positive In</th>
         <th>Rent Estimate</th>
         <th>Analyse</th>
       </tr>
@@ -117,6 +119,8 @@
         <td>${{ res['list_price'] }}</td>
         <td>{{ res['beds'] }}</td>
         <td>{{ res['baths_full'] }}</td>
+        <td>{{res ['cflow_positive']}} years</td>
+        <td>{{res['rroi_positive']}} years</td>
         <td>${{ res['rent_estimate'] }}</td>
         <td>
           <form action="/analyse" method="POST">
