@@ -338,7 +338,7 @@ def collect_property_data(research,incr_exp,incr_val,incr_inc):
       amt_tab['total_exp'] = amt_tab['interest'] + monthly_exp + monthly_prop_tax
       amt_tab['total_inc'] = rental_estimate
       amt_tab['total_pnl'] = amt_tab['total_inc'] - amt_tab['total_exp'] 
-      #print (".", end="")
+      #print (".", end="") Hello
       prop_data={
           "index": index,
           "address": address,
