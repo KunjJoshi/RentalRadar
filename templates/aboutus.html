@@ -11,17 +11,17 @@
     }
 
     .navbar {
-      background-color: #007bff; /* Navbar background color */
-      color: #ffffff; /* Text color */
+      background-color: #007bff;
+      color: #ffffff;
       display: flex;
       align-items: center;
       padding: 10px;
     }
 
     .navbar-logo {
-      width: 50px; /* Logo size */
-      height: 50px; /* Logo size */
-      margin-right: 10px; /* Spacing between logo and buttons */
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
     }
 
     .navbar-title {
@@ -30,7 +30,7 @@
       margin-right: auto;
     }
 
-    .navbar-link {
+    .navbar-button {
       display: inline-block;
       padding: 10px 15px;
       margin-right: 10px;
@@ -38,105 +38,165 @@
       border-radius: 4px;
       font-size: 16px;
       font-weight: bold;
-      background-color: #007bff; /* Button background color */
-      color: #ffffff; /* Button text color */
-      text-decoration: none;
+      background-color: #007bff;
+      color: #ffffff;
+      cursor: pointer;
     }
 
-    .navbar-link:hover {
-      background-color: #0056b3; /* Button background color on hover */
+    .navbar-button:hover {
+      background-color: #0056b3;
     }
 
-    .card-container {
+    .card-container{
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       align-items: flex-start;
-      margin: 20px;
+      margin:20px;
+      background-color: #f2f2f2;
     }
 
-    .card {
-      width: 300px;
+    .section{
+      padding-top: 30px;
+      display: flex;
+      flex-direction: row;
+
+    }
+    
+    .title-header{
+      text-align: center;
+      font-weight: bold;
+      font-size: 24px;
+      color: black;
+      margin: 30px 0;
+    }
+
+    .card{
+      width:500px;
+      height: 500px;
       padding: 20px;
       margin: 20px;
       background-color: #ffffff;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000000;
     }
 
-    .card-image {
+    .card-name{
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color:#000000;
+      margin-bottom: 10px;
+    }
+
+    .card-description{
+      text-align: justify;
+      font-size: 16px;
+      color: #000000;
+    }
+
+    .card-image{
       display: flex;
       justify-content: center;
       margin-bottom: 20px;
     }
 
-    .card-image img {
-      width: 150px;
-      height: 150px;
+    .card-image img{
+      width:200px;
+      height: 200px;
       object-fit: cover;
       border-radius: 50%;
     }
 
-    .card-name {
-      font-weight: bold;
-      font-size: 18px;
-      margin-bottom: 10px;
+    .text-container{
+      max-width:80%;
+      color: #000000;
+      display: flex;
+      font-size: 20px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center ;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .card-description {
-      font-size: 16px;
+    .text-para{
+      text-align: justify;
+      margin: 10px 0;
     }
   </style>
 </head>
 <body>
   <div class="navbar">
     <img class="navbar-logo" src="{{ url_for('static', filename='RentalRadar.jpeg') }}" alt="Rental Radar Logo">
-    <a href="/" class="navbar-link">Home</a>
-    <a href="/about-us" class="navbar-link">About Us</a>
-    <a href="/contact-us" class="navbar-link">Contact Us</a>
-    <a href="/mission" class="navbar-link">Mission</a>
-    <a href="/subscribe" class="navbar-link">Subscribe</a>
+    <a class="navbar-title">Rental Radar</a>
+    <a href="/" class="navbar-button">Home</a>
+    <a href="/contact-us" class="navbar-button">Contact Us</a>
+    <a href="/mission" class="navbar-button">Mission</a>
+    <a href="/subscribe" class="navbar-button">Subscribe</a>
   </div>
 
-  <h1>About Us</h1>
+  <h1 class="title-header">Rental Radar - The future of Rental Investment Analysis</h1>
 
-  <p>Rental Radar is a leading platform that provides property listings and analysis for rental properties. We aim to simplify the process of finding and analyzing rental properties to help individuals make informed decisions.</p>
+  <h2 class="title-header">Introduction</h2>
 
-  <h2>Meet Our Founders</h2>
+  <div class="text-container">
 
+  <p class="text-para">In the dynamic and fiercely competitive landscape of the real estate market, gaining a strategic advantage has become a pivotal factor for success. In this context, RentalRadar emerges as a game-changer, providing a cutting-edge solution that empowers investors with unparalleled insights and tools. Recognizing the intricate challenges that investors encounter in their pursuit of lucrative rental opportunities, RentalRadar has crafted a platform that goes beyond the ordinary.</p>
+  <p class="text-para">At the core of RentalRadar's mission lies the commitment to equip investors with an edge that can significantly impact their decision-making process. Unlike conventional approaches, RentalRadar stands out by offering an intuitive and innovative platform that harnesses the power of advanced technology and data analytics. This platform serves as a transformative tool, offering a distinctive lens through which investors can comprehensively assess and visualize rental investments.</p>
+  <p class="text-para">One of the primary strengths of RentalRadar is its ability to tap into real-time and accurate market data, which is essential in a rapidly evolving real estate landscape. By seamlessly integrating up-to-date market trends, RentalRadar empowers investors to make informed and strategic decisions. Through this unique approach, investors can confidently navigate the intricate nuances of the rental market, identifying opportunities that align with their investment goals and risk appetite.</p>
+  <p class="text-para">In essence, RentalRadar embodies the fusion of technology, data, and real estate expertise, offering investors a comprehensive toolkit that redefines their approach to rental property investments. With a firm belief that every investment decision should be backed by insights rather than guesswork, RentalRadar is ushering in a new era of informed and strategic investing in the real estate market. It's not just about numbers; it's about gaining a competitive advantage that sets investors on a path to success in an ever-evolving market landscape. </p>
+
+  </div>
+  <h2 class="title-header">Meet Our Founders</h2>
+  <h3 class="title-header">Meet The Team</h3>
   <div class="card-container">
-    <div class="card">
-      <div class="card-image">
-        <img src="{{ url_for('static', filename='kunj_joshi.jpg') }}" alt="Kunj Joshi">
+    <div class="section">
+      <div class="card">
+        <div class="card-image">
+          <img src="{{ url_for('static', filename='kunj_joshi.jpeg') }}" alt="Kunj Joshi">
+        </div>
+        <h3 class="card-name">Kunj Joshi</h3>
+        <p class="card-description"> Kunj is an experienced AI Engineer who is enthusiastic about Real Estate problems and wants to incorporate AI as an all time solution to the existing problems. With Neural Networks and Regression algorithms, Kunj focuses on making the Rental Radar algorithms as effecient as ever and reduce the error ratio to its ultimate minimum. He uses his own customisations under his mentors to make a better algorithm which keeps on training itself based on live data being fed to it continously. His vision and knowledge of algorithms made Rental Radar being a possibility today. </p>
       </div>
-      <h3 class="card-name">Kunj Joshi</h3>
-      <p class="card-description">Kunj is a passionate real estate enthusiast with expertise in property analysis and investment strategies.</p>
-    </div>
 
-    <div class="card">
-      <div class="card-image">
-        <img src="{{ url_for('static', filename='panth_shah.jpg') }}" alt="Panth Shah">
+      <div class="card">
+        <div class="card-image">
+          <img src="{{ url_for('static', filename='panth_shah.jpeg') }}" alt="Panth Shah">
+        </div>
+        <h3 class="card-name">Panth Shah</h3>
+        <p class="card-description">Panth is an up and coming enthusiastic data scientist who has an expertise in cleaning and preprocessing data being fed to the algorithms. Panth's expertly written algorithms make sure no kind of malicious data is ever fed to the algorithms behind Rental Radar's prediction technologies. As a student of data science, Panth analyses the incoming data from various sources and he writes algorithms to separate outliers and noise from useful data. His algorithms have increased the efficency of Rental Radar models manifolds.</p>
       </div>
-      <h3 class="card-name">Panth Shah</h3>
-      <p class="card-description">Panth is an experienced real estate professional who specializes in market analysis and property valuation.</p>
-    </div>
 
-    <div class="card">
-      <div class="card-image">
-        <img src="{{ url_for('static', filename='anay_shah.jpg') }}" alt="Anay Shah">
+      <div class="card">
+        <div class="card-image">
+          <img src="{{ url_for('static', filename='anay_shah.jpeg') }}" alt="Anay Shah">
+        </div>
+        <h3 class="card-name">Anay Shah</h3>
+        <p class="card-description">Anay is a Computer Engineer and Data Scientist. As a student of Computer Science, Anay's maestro lies in integrating every algorithm with a beautiful representation. He improvises the algorithms on his own accord and integrates them to the Rental Radar Website. His maestro has made the dream of Rental Radar come true. He makes sure that none of the customers have to wait in order to get their data and he has made a user-friendly and simple web application for the same.</p>
       </div>
-      <h3 class="card-name">Anay Shah</h3>
-      <p class="card-description">Anay is a data-driven individual who leverages analytics and technology to provide accurate property insights.</p>
+      </div>
     </div>
-
-    <div class="card">
-      <div class="card-image">
-        <img src="{{ url_for('static', filename='bhavin_shah.jpg') }}" alt="Bhavin Shah">
+    <h3 class="title-header">Meet the Mentors</h3>
+    <div class="card-container">
+    <div class="section">
+      <div class="card">
+        <div class="card-image">
+          <img src="{{ url_for('static', filename='bhavin_shah.jpeg') }}" alt="Bhavin Shah">
+        </div>
+        <h3 class="card-name">Bhavin Shah</h3>
+        <p class="card-description">Bhavin is a seasoned entrepreneur and an AI Hardware Engineer. Rental Radar is the brainchild of Mr Bhavin Shah. He created the algorithms which made the founding base of Rental Radar and mentored the team to an inexplicable success. Under his guidance, Rental Radar sees an upheaval and a incorporates a market-friendly and user-friendly approach to strategic planning and display.</p>
       </div>
-      <h3 class="card-name">Bhavin Shah</h3>
-      <p class="card-description">Bhavin is a seasoned entrepreneur who brings strategic vision and innovation to Rental Radar's operations.</p>
+      <div class="card">
+        <div class="card-image">
+          <img src="{{ url_for('static', filename='ronak_shah.jpeg') }}" alt="Bhavin Shah">
+        </div>
+        <h3 class="card-name">Ronak Shah</h3>
+        <p class="card-description">Ronak is a seasoned software engineer, who mentors the technical team and overlooks the operations of Rental Radar. Under his guidance, the technical team prospers and creates efficient algorithms and web applications. He has many great projects and industries under his belt and his leadership qualities inspire the team to build beautiful applications which can attract people from afar. </p>
+      </div>
+      </div>
+      </div>
     </div>
   </div>
-
 </body>
 </html>
