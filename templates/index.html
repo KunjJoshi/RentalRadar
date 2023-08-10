@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </script>
   <title>Welcome To Rental Radar</title>
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='RentalRadar.jpeg') }}">
@@ -116,7 +117,8 @@
     <a href="/subscribe" class="navbar-button">Subscribe</a>
   </div>
 
-  <h1 class="heading">Property Listings</h1>
+  <h1 class="heading">Your Zipcode + Our Analysis = Investment Success</h1>
+  <h2 class="heading">Enter Zipcode to continue...</h2>
   <form action="/parameters" method="POST">
     <label for="zipcode">Zip Code:</label>
     <input type="text" id="zipcode" name="zipcode"><br><br>
