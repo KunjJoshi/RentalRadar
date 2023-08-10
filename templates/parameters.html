@@ -45,6 +45,7 @@
       font-weight: bold;
       font-size: 20px;
       margin-right: auto;
+      color:#ffffff;
     }
 
     .navbar-button {
@@ -114,7 +115,7 @@
 <body>
 <div class="navbar">
   <img class="navbar-logo" href="/" src="{{ url_for('static', filename='RentalRadar.jpeg') }}" alt="Rental Radar Logo">
-  <a class="navbar-title" href="/">Rental Radar</a>
+  <a class="navbar-title" href="/index">Rental Radar</a>
   <a href="/about-us" class="navbar-button">About Us</a>
   <a href="/contact-us" class="navbar-button">Contact Us</a>
   <a href="/mission" class="navbar-button">Mission</a>
@@ -125,19 +126,19 @@
   <form action="/listings" method="POST">
     <input type="hidden" name="zipcode" value="{{zip}}">
     <label>Percentage of Down Payment:</label>
-    <input type="number" id="down-payment" name="downpayment" required><br><br>
+    <input type="number" id="down-payment" name="downpayment" placeholder="30" value="30" required><br><br>
     <label>Current Mortgage Interest Rate:</label>
-    <input type="number" id="interest-rate" name="interest" step="0.01" required><br><br>
+    <input type="number" id="interest-rate" name="interest" step="0.01" placeholder="3.25" value="3.25" required><br><br>
     <label>Property Tax Rate:</label>
-    <input type="number" id="property-tax" name="propertytax" step="0.01" required><br><br>
+    <input type="number" id="property-tax" name="propertytax" step="0.01" placeholder="2.75"  value="2.75" required><br><br>
     <label>Average Monthly Expenses:</label>
-    <input type="number" id="monthly-expenses" name="expense" required><br><br>
+    <input type="number" id="monthly-expenses" name="expense" placeholder="1000" value="1000" required><br><br>
     <label>Increase % in Expenses:</label>
-    <input type="number" id="incr-exp" name="incr_exp" step="0.01" required><br><br>
+    <input type="number" id="incr-exp" name="incr_exp" step="0.01" placeholder="10" value="10" required><br><br>
     <label>Increase % in Rent Income:</label>
-    <input type="number" id="incr-inc" name="incr_inc" step="0.01" required><br><br>
+    <input type="number" id="incr-inc" name="incr_inc" step="0.01" placeholder="7" value="7" required><br><br>
     <label>Increase % in Property Value:</label>
-    <input type="number" id="incr-val" name="incr_val" step="0.01" required><br><br>
+    <input type="number" id="incr-val" name="incr_val" step="0.01" placeholder="3" value="3" required><br><br>
     <input type="submit" value="Submit">
   </form>
   

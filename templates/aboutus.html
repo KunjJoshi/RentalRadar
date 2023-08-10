@@ -29,6 +29,7 @@
       font-weight: bold;
       font-size: 20px;
       margin-right: auto;
+      color: #ffffff;
     }
 
     .navbar-button {
@@ -130,7 +131,7 @@
 <body>
   <div class="navbar">
     <img class="navbar-logo" src="{{ url_for('static', filename='RentalRadar.jpeg') }}" alt="Rental Radar Logo">
-    <a class="navbar-title">Rental Radar</a>
+    <a class="navbar-title" href="/index">Rental Radar</a>
     <a href="/" class="navbar-button">Home</a>
     <a href="/contact-us" class="navbar-button">Contact Us</a>
     <a href="/mission" class="navbar-button">Mission</a>
