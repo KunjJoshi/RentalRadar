@@ -54,102 +54,34 @@ body {
   cursor: pointer;
 }
 
-.navbar-button:hover {
-  background-color: #0056b3;
-}
+    .navbar-button:hover {
+      background-color: #0056b3;
+    }
+    
+    .card-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
 
-.section {
-  padding-top: 1.6vh; /* Adjusted padding */
-  margin-top: 1.6vh;
-  width: 80vh;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 1vh #000000; /* Adjusted box shadow */
-  border-radius: 10px;
-}
+    .card {
+      width: 300px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 10px;
+    }
 
-.title-header {
-  text-align: center;
-  font-weight: bold;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 5vh; /* Adjusted font size */
-  color: #000000;
-}
+    .card-title {
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
 
-.disclaimer-title {
-  text-align: center;
-  font-weight: bold;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 3vh; /* Adjusted font size */
-  color: #ee4b2b;
-}
-
-.text-para {
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1.85vh; /* Adjusted font size */
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  text-align: justify;
-  padding: 1.6vh; /* Adjusted padding */
-}
-
-.disclaimer-section {
-  padding-top: 1.6vh; /* Adjusted padding */
-  margin-top: 1.6vh;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: center;
-  align-items: center;
-}
-
-.disclaimer-text {
-  font-size: 1.5vh; /* Adjusted font size */
-  margin-left: auto;
-  margin-right: auto;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  text-align: center;
-}
-
-.list-card-container {
-  max-width: 80vh;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 1.6vh; /* Adjusted margin */
-}
-
-.list-card {
-  max-width: 80vh;
-  box-shadow: 0 0 1vh #000000; /* Adjusted box shadow */
-  margin-top: 1.6vh; /* Adjusted margin */
-  border-radius: 20px;
-}
-
-.list-title {
-  text-align: center;
-  justify-content: center;
-  color: #000000;
-  font-size: 3vh; /* Adjusted font size */
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-weight: bold;
-}
-
-.list-description {
-  text-align: justify;
-  padding: 1.6vh; /* Adjusted padding */
-  margin-right: auto;
-  margin-left: auto;
-  font-size: 1.85vh; /* Adjusted font size */
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: #000000;
-}
-
+    .card-content {
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
@@ -159,51 +91,27 @@ body {
     <a href="/" class="navbar-button">Home</a>
     <a href="/about-us" class="navbar-button">About Us</a>
     <a href="/contact-us" class="navbar-button">Contact Us</a>
+    <a href="/mission" class="navbar-button">Mission</a>
     <a href="/subscribe" class="navbar-button">Subscribe</a>
   </div>
-  <div class="section">
-    <h1 class="title-header">Our Mission</h1>
-    <p class="text-para">At the heart of our philosophy lies the unshakable belief in empowering every investor with data-driven insights. By seamlessly translating intricate market dynamics into actionable investment knowledge, RentalRadar is dedicated to streamlining the rental investment process for individuals of all backgrounds. We aim to bridge the gap between available properties and potential investors, ensuring that you're always one step ahead in your investment journey. Our journey is marked by a commitment to providing investors with a comprehensive and holistic platform that offers more than just raw data. We understand that making informed decisions in the real estate realm is not just about numbers; it's about understanding trends, recognizing patterns, and foreseeing opportunities. RentalRadar becomes your ally in this endeavor by presenting data in a clear and meaningful manner, helping you make calculated choices with confidence. By offering a centralized hub of property listings, market analytics, and investment strategies, RentalRadar becomes an indispensable tool in your investment toolkit. Whether you're a seasoned investor or just starting out, our platform offers insights that empower you to make intelligent decisions aligned with your investment goals. Our mission is to empower you with the information and resources you need to make real estate investment a rewarding and successful journey. With RentalRadar, you're not just navigating the rental property market; you're embracing a future full of potential and prosperity.</p>
-  </div>
-  <h1 class="title-header">The Rental Radar Difference</h1>
-  <div class="list-card-container">
-    <div class="list-card">
-      <p class="list-title">Comprehensive Data Collection</p>
-      <p class="list-description">Through the consolidation of property listings drawn from an extensive network of diverse sources, we empower you with an extensive array of potential investment opportunities. Our commitment to comprehensive coverage ensures that you gain access to a broad spectrum of properties, enabling informed investment decisions. At RentalRadar, we recognize the significance of a holistic approach to real estate investment. By presenting a diverse portfolio of listings, we aim to cater to a wide range of preferences and requirements. This curated collection of options equips investors with the tools they need to navigate the dynamic real estate landscape. Whether you're seeking residential, commercial, or other property types, our platform offers a unified gateway to explore various investment avenues. Your investment journey is unique, and RentalRadar is dedicated to providing the breadth of choice that empowers you to make the best decisions for your financial goals.</p>
-    </div>
-    <div class="list-card">
-      <p class="list-title">Advanced Machine Learning</p>
-      <p class="list-description">Central to our platform lies a proprietary machine learning algorithm, meticulously trained to predict rental income estimates with unmatched accuracy. This cutting-edge technology guarantees meticulous assessment of each investment prospect, enhancing your decision-making process. At RentalRadar, we prioritize equipping investors with reliable insights to make informed choices. Through continuous refinement and advanced data analysis, our algorithm empowers you to evaluate potential returns confidently. Whether you're a seasoned investor or new to the real estate landscape, our commitment to leveraging technology ensures that you have access to the most up-to-date and reliable projections for your investment endeavors. Through a cycle of continuous refinement and advanced data analysis, our algorithm not only calculates estimates but also adapts to evolving market dynamics. This ensures that whether you're a seasoned investor or new to the real estate landscape, you can confidently evaluate potential returns. Our dedication to leveraging technology means you have access to the most up-to-date and reliable projections for your investment endeavors. In an ever-changing real estate market, our machine learning algorithm serves as your compass, guiding you through complex variables and offering a glimpse into the future. By harnessing the power of data-driven insights, RentalRadar equips you to navigate investment decisions with clarity and foresight, ultimately maximizing your success in the realm of rental properties.</p>
-    </div>
-    <div class="list-card">
-      <p class="list-title">In Depth Analysis</p>
-      <p class="list-description">Navigating the intricate terrain of real estate investments requires a comprehensive understanding of various factors. With RentalRadar, we go beyond the surface to provide a detailed analysis. Our platform factors in critical elements such as projected expenses, anticipated rental income growth, and property valuation appreciation. This holistic approach ensures that investors gain a well-rounded view of their potential ventures, allowing them to make informed choices. What truly sets us apart is our commitment to offering a 30-year projection model. In a market where short-term trends often dominate, our long-term perspective is a game-changer. This extended projection empowers investors with insights into how an investment could perform over an extended period, enabling them to see beyond immediate gains and anticipate future trends. At RentalRadar, we're not just about immediate returns; we're about equipping investors with the tools they need to thrive in the long run. With our in-depth analyses and forward-looking approach, investors can confidently navigate the dynamic real estate landscape and make decisions that align with their financial goals.</p>
-    </div>
-  </div>
-  <h1 class="title-header">Features and Benefits</h1>
-  <div class="list-card-container">
-    <div class="list-card">
-      <p class="list-title">Tailored Investment Analysis</p>
-      <p class="list-description">RentalRadar transcends the typical property listing platform by delving deep into rental investment analyses tailored to individual zip codes. Our approach goes beyond surface-level data, providing investors with localized insights crucial for making informed decisions. This personalized approach empowers you to navigate the intricacies of each market, offering a competitive edge. We recognize that real estate is inherently local, and by focusing on zip codes, we bring you a granular perspective that sets RentalRadar apart. Whether you're exploring new avenues or honing your strategies, our zip code-specific analyses arm you with the knowledge needed to thrive in diverse rental markets.</p>
-    </div>
-    <div class="list-card">
-      <p class="list-title">Free Basic Reports</p>
-      <p class="list-description">Access preliminary rental analytics and comprehensive property comparisons without any cost, providing you with the confidence to embark on your investment journey. At no financial commitment, RentalRadar empowers you to explore essential insights that lay the foundation for informed decisions. Our commitment to transparency and accessibility means that you can assess potential rental properties with ease, understanding their income potential and market competitiveness. This complimentary access to valuable data sets the stage for a successful investment trajectory, ensuring you have the necessary tools to identify lucrative opportunities. With RentalRadar, your investment journey begins on a solid footing, enabling you to navigate the complexities of the real estate market with assurance.</p>
-    </div>
-    <div class="list-card">
-      <p class="list-title">User Friendly Interface</p>
-      <p class="list-description">Crafted for peak performance on desktop computers, RentalRadar boasts a responsive design that guarantees flawless functionality across mobile browsers as well. Whether you're accessing our platform from a computer or a mobile device, you'll experience a consistent and user-friendly interface. Our commitment to accessibility ensures that you can harness the power of RentalRadar's insights and features, regardless of the device you choose. This adaptability enhances your convenience and flexibility, allowing you to stay connected to the world of rental investment even when you're on the go. With RentalRadar, a superior user experience awaits you, tailored to meet your needs across a variety of platforms.</p>
-    </div>
-  </div>
-  <div class="section">
-  <h1 class="title-header">Looking Forward </h1>
-  <p class="text-para">Continuing our journey of innovation, we're thrilled to share our upcoming roadmap, which features the highly anticipated launch of dedicated apps for both iPhone and Android platforms. These dedicated apps are poised to elevate your user experience by providing seamless access to RentalRadar's suite of features and insights directly from your mobile device. With these apps, you'll have rental investment analytics, property comparisons, and more at your fingertips, allowing you to make informed decisions on the go. Our commitment to enhancing user experience extends to providing tailored solutions that cater to your preferences and convenience. Stay tuned for the release of our mobile apps, as we empower you with even more tools to navigate the world of rental investment with confidence.</p>
-  </div>
 
-  <div class="disclaimer-section">
-    <h1 class="disclaimer-title">DISCLAIMER</h1>
-    <p class="disclaimer-text">RentalRadar stands as a testament to the power of data. However, it's essential to note that our platform is purely analytical, refraining from providing direct investment advice or recommendations. Every investor should utilize the data as a guide, combined with personal research and professional consultation.</p>
-  </div>
+  <h1 class="heading">Our Mission, Vision, and Aim</h1>
+  
+  <div class="card-container">
+    <div class="card">
+      <h2 class="card-title">Mission</h2>
+      <p class="card-content">Our mission is to provide users with accurate and up-to-date information about rental properties to make informed decisions.</p>
+    </div>
 
+    <div class="card">
+      <h2 class="card-title">Vision</h2>
+      <p class="card-content">Our vision is to simplify the process of finding and renting properties by leveraging advanced data analysis and user-friendly interfaces.</p>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">Aim</h2>
+      <p class="card-content">Our aim is to become the go-to platform for tenants, landlords, and real estate professionals, fostering a transparent and efficient rental market.</p>
+    </div>
+  </div>
 </body>
 </html>
