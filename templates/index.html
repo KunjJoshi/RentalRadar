@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="/static/index.css" media="screen">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </script>
@@ -17,127 +17,29 @@
 
   gtag('config', 'G-0DBNCK7C98');
 </script>
-  <style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-  margin: 0;
-}
-
-.heading {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  color: #000;
-  text-align: center;
-  margin-top: 5vh; /* 5% of viewport height */
-}
-
-.navbar {
-  background-color: #007bff;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  padding: 1vh; /* 1% of viewport height */
-}
-
-.navbar-logo {
-  width: 5vh; /* 5% of viewport height */
-  height: 5vh; /* 5% of viewport height */
-  margin-right: 1vh; /* 1% of viewport height */
-}
-
-.navbar-title {
-  font-weight: bold;
-  font-size: 2vh; /* 2% of viewport height */
-  margin-right: auto;
-}
-
-.navbar-button {
-  display: inline-block;
-  padding: 1vh 1.5vh; /* 1% of viewport height and 1.5% of viewport height */
-  margin-right: 1vh; /* 1% of viewport height */
-  border: none;
-  border-radius: 4px;
-  font-size: 1.6vh; /* 1.6% of viewport height */
-  font-weight: bold;
-  background-color: #007bff;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.navbar-button:hover {
-  background-color: #0056b3;
-}
-
-form {
-  max-width: 40%; /* Adjusted max width */
-  margin: 5vh auto; /* 5% of viewport height */
-  padding: 2vh; /* 2% of viewport height */
-  background-color: #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 0 1vh rgba(0, 0, 0, 0.1); /* 1% of viewport height */
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 2vh; /* 2% of viewport height */
-}
-
-input[type="text"] {
-  width: 90%; /* 80% of parent element width */
-  height: 10%; /* 10% of parent element height */
-  padding: 1vh; /* 1% of viewport height */
-  font-size: 1.6vh; /* 1.6% of viewport height */
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  margin: 0 auto; /* Center alignment */
-}
-
-input[type="submit"] {
-  display: block;
-  width: 100%;
-  padding: 1vh; /* 1% of viewport height */
-  font-size: 1.6vh; /* 1.6% of viewport height */
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-h1 {
-  font-size: 5vh; /* 7% of viewport height */
-}
-
-h2 {
-  font-size: 3vh; /* 5% of viewport height */
-}
-
-  </style>
-</head>
 <body>
   <div class="navbar">
     <img class="navbar-logo" src="{{ url_for('static', filename='RentalRadar.jpeg') }}" alt="Rental Radar Logo">
     <h1 class="navbar-title">Rental Radar</h1>
+    <div class="nav-buttons">
     <a href="/about-us" class="navbar-button">About Us</a>
     <a href="/contact-us" class="navbar-button">Contact Us</a>
     <a href="/mission" class="navbar-button">Mission</a>
     <a href="/subscribe" class="navbar-button">Subscribe</a>
+    </div>
   </div>
-
+  <div class="image-container">
+  <div class="heading-cover">
   <h1 class="heading">Your Zipcode + Our Analysis = Investment Success</h1>
+  </div>
+  <div class="heading-cover">
   <h2 class="heading">Enter Zipcode to continue...</h2>
-  <form action="/parameters" method="POST">
+  </div>
+  <form action="/parameters" class="zip-form" method="POST">
     <label for="zipcode">Zip Code:</label>
     <input type="text" id="zipcode" name="zipcode"><br><br>
     <input type="submit" value="Submit">
   </form>
+</div>
 </body>
 </html>
-
-
