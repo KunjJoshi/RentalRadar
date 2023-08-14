@@ -18,6 +18,7 @@
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
             color: #333;
+            line-height: 1.6;
         }
 
         .container {
@@ -29,7 +30,6 @@
         /* Navbar styles */
         .navbar {
             display: flex;
-            height: 10%;
             justify-content: space-between;
             align-items: center;
             background-color: #007bff; /* Blue color */
@@ -38,8 +38,8 @@
         }
 
         .navbar-logo {
-            width: 100px;
-            height: 60px;
+            max-width: 100px;
+            height: auto;
             margin-right: 10px;
         }
 
@@ -67,29 +67,27 @@
         /* Image container styles */
         .image-container {
             text-align: center;
-            background-color: #fff; /* White color */
             padding: 20px;
             border-radius: 10px;
-            height: 86.5vh;
-            width: 100%;
             background-image: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45)),url('/static/Big-Sur.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 86.5vh;
         }
 
         .heading {
             font-size: 5vh;
             margin-bottom: 1.6vh;
             color:#f7f7f7;
-
         }
 
         .form-container{
           background-color: #f7f7f7;
           padding: 20px;
           margin: 3vh;
-          max-width: 40%;
+          max-width: 70%;
           margin-left: auto;
           margin-right: auto;
-          height: 20vh;
           box-shadow: 5px 5px 5px 5px #ffffff;
         }
         .zip-form {
@@ -106,9 +104,9 @@
         }
 
         .zip-input {
-            width: 60%; /* Full width input */
+            width: 100%; /* Full width input */
             padding: 5px;
-            height: 2.5vh;
+            height: 4vh;
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -125,42 +123,77 @@
             height: 5vh;
             width: 30%;
             font-size: larger;
-
         }
 
         /* Responsive styles */
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 1200px) {
+            .container {
+                padding: 10px;
+            }
+        }
+
+        @media screen and (max-width: 992px) {
             .navbar {
-                height: auto; /* Allow content to dictate height */
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
             }
 
             .navbar-logo {
-                width: 50%;
-                height: 10vh; /* Allow logo to scale */
                 margin: 10px 0;
             }
 
-            .navbar-title {
-                margin-bottom: 10px;
+            .navbar-link {
+                margin: 5px 0;
             }
 
-            .navbar-right {
-                margin-top: 10px;
+            .form-container {
+                max-width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar-title {
+                font-size: 4vh;
             }
 
             .navbar-link {
-                display: block;
-                margin-bottom: 10px;
+                padding: 1.5vh;
             }
 
             .heading {
-                font-size: 28px;
+                font-size: 4vh;
             }
 
-            .zip-input {
-                width: 100%;
+            .zip-label {
+                font-size: 3vh;
+            }
+
+            .zip-input,
+            .submit-btn {
+                height: 6vh;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .navbar-link {
+                font-size: 3vh;
+            }
+
+            .heading {
+                font-size: 3.5vh;
+            }
+
+            .form-container {
+                padding: 10px;
+            }
+
+            .zip-label {
+                font-size: 2.5vh;
+            }
+
+            .zip-input,
+            .submit-btn {
+                height: 7vh;
             }
         }
     </style>
@@ -184,11 +217,11 @@
         <h1 class="heading"> Your Zipcode + Our Analysis = Perfect Investment</h1>
         <h2 class="heading">Enter your Zipcode Below to start Analysis</h2>
         <div class="form-container">
-        <form class="zip-form" action="/parameters" method="POST">
-            <label class="zip-label">Zipcode: </label>
-            <input type="text" name="zipcode" class="zip-input">
-            <button type="submit" class="submit-btn">Submit</button>
-        </form>
+            <form class="zip-form" action="/parameters" method="POST">
+                <label class="zip-label">Zipcode: </label>
+                <input type="text" name="zipcode" class="zip-input">
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
         </div>
     </div>
 </body>
