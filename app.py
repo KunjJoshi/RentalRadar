@@ -30,7 +30,9 @@ def listings():
 
 @app.route('/parameters',methods=['POST'])
 def parameters():
+  print('Recieved a Request for Parameters')
   zipcode=request.form['zipcode']
+  print(zipcode)
   return render_template('parameters.html',zip=zipcode)
 
 @app.route('/analyse',methods=['POST'])

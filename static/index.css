@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Acme:400');
+.body{
+  font-family: "Acme",sans-serif;
+  background-color: #000000;
+}
+
+.navbar{
+  height: 20%;
+  padding: 2px;
+  background-color: #ffffff;
+}

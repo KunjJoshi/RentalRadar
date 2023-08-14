@@ -1,157 +1,195 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="/static/index.css" media="screen">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</script>
-  <title>Welcome To Rental Radar</title>
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='RentalRadar.jpeg') }}">
-  <style>
-    /* Reset default margins and padding */
-body, html {
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Navbar styling */
-  .navbar {
-    background-color: white;
-    width: 100%;
-    height: 12.5vh; /* 1/8th of the screen */
-    display: flex;
-    align-items: center;
-    color: black;
-  }
-  
-  .navbar-logo {
-    width: auto;
-    height: 80%; /* Adjust as needed */
-    margin-right: 2%; 
-    margin-left: 2%/* 2% margin between logo and title */;
-    float: flex-start;
-  }
-  
-  .navbar-title {
-    font-family: 'Acme', sans-serif;
-    margin-right: auto; /* 2% margin between logo and title */
-    align-items: flex-start;
-    
-  }
-  .navbar-button {
-    width: 6%;
-    padding: 0.6vh 0.6vh;
-    text-align: center;
-    text-decoration: none;
-    font-size: 2vh;
-    color: black;
-    transition: background-color 0.3s, color 0.3s;
-    align-items: flex-end;
-    margin-right: 1vh;
-  }
-  
-  .navbar-button:hover {
-    background-color: #000000;
-    color: white;
-  }
-  
-  /* Image container styling */
-  .image-container {
-    background-image: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45)),url('/static/Big-Sur.jpg');
-    
-    background-size: cover;
-    background-position: center;
-    height: calc(100vh - 12.5vh); /* Total screen height - Navbar height */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .heading {
-    font-family: 'Acme', sans-serif;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-  }
-  /* Zip Form styling */
-  .zip-form {
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 80vh;
-    height: 20vh;
-  }
-  
-  .zip-form label {
-    font-family: 'Acme', sans-serif;
-    font-size: 3vh;
-  }
-  
-  .zip-form input[type="text"] {
-    height: 3vh;
-    width: 100%;
-    margin: 3vh 0;
-    padding: 5px;
-    text-align: center;
-    font-size: 1.78vh;
-  }
-  
-  .zip-form input[type="submit"] {
-    background-color: orange;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    padding: 0.6vh 0.6vh;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 10%;
-    height: 3vh;
-    font-size: 1.78vh;
-  }
-  
-  .zip-form input[type="submit"]:hover {
-    background-color: darkorange;
-  }
-  
-  </style>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0DBNCK7C98"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Rental Radar</title>
+    <link rel="stylesheet" href="/static/index.css">
+    <style>
+        /* Reset some default styles */
+        body, h1, h2, p, ul, li {
+            margin: 0;
+            padding: 0;
+        }
 
-  gtag('config', 'G-0DBNCK7C98');
-</script>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            display: flex;
+            height: 10%;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #007bff; /* Blue color */
+            padding: 10px 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-logo {
+            width: 100px;
+            height: 60px;
+            margin-right: 10px;
+        }
+
+        .navbar-title {
+            font-size: 2.4vh;
+            color: #fff; /* White color */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .navbar-link {
+            margin-right: 2vh;
+            color: #fff; /* White color */
+            text-decoration: none;
+            padding: 2vh;
+            font-weight: bold;
+        }
+
+        .navbar-link:hover{
+          background-color: #f7f7f7;
+          color:#333;
+          transition: all .2s ease-out;
+        }
+
+        /* Image container styles */
+        .image-container {
+            text-align: center;
+            background-color: #fff; /* White color */
+            padding: 20px;
+            border-radius: 10px;
+            height: 86.5vh;
+            width: 100%;
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45)),url('/static/Big-Sur.jpg');
+        }
+
+        .heading {
+            font-size: 5vh;
+            margin-bottom: 1.6vh;
+            color:#f7f7f7;
+
+        }
+
+        .form-container{
+          background-color: #f7f7f7;
+          padding: 20px;
+          margin: 3vh;
+          max-width: 40%;
+          margin-left: auto;
+          margin-right: auto;
+          height: 20vh;
+          box-shadow: 5px 5px 5px 5px #ffffff;
+        }
+        .zip-form {
+            display: flex;
+            flex-direction: column; /* Stacking elements */
+            align-items: center;
+            margin-top: 2vh;
+        }
+
+        .zip-label {
+            font-size: 2vh;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .zip-input {
+            width: 60%; /* Full width input */
+            padding: 5px;
+            height: 2.5vh;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submit-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            margin-top: 3vh;
+            height: 5vh;
+            width: 30%;
+            font-size: larger;
+
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 768px) {
+            .navbar {
+                height: auto; /* Allow content to dictate height */
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar-logo {
+                width: 50%;
+                height: 10vh; /* Allow logo to scale */
+                margin: 10px 0;
+            }
+
+            .navbar-title {
+                margin-bottom: 10px;
+            }
+
+            .navbar-right {
+                margin-top: 10px;
+            }
+
+            .navbar-link {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .heading {
+                font-size: 28px;
+            }
+
+            .zip-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
 <body>
-  <div class="navbar">
-    <img class="navbar-logo" src="{{ url_for('static', filename='RentalRadar.jpeg') }}" alt="Rental Radar Logo">
-    <h1 class="navbar-title">Rental Radar</h1>
-    <div class="nav-buttons">
-    <a href="/about-us" class="navbar-button">About Us</a>
-    <a href="/contact-us" class="navbar-button">Contact Us</a>
-    <a href="/mission" class="navbar-button">Mission</a>
-    <a href="/subscribe" class="navbar-button">Subscribe</a>
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="/index"><img class="navbar-logo" src="/static/RentalRadar.jpeg"></a>
+            <a href="/index" class="navbar-title">Rental Radar</a>
+        </div>
+        <div class="navbar-right">
+            <a class="navbar-link" href="/index">Home</a>
+            <a class="navbar-link" href="/about-us">About Us</a>
+            <a class="navbar-link" href="/contact-us">Contact Us</a>
+            <a class="navbar-link" href="/mission">Mission</a>
+            <a class="navbar-link" href="/subscribe">Subscribe</a>
+        </div>
     </div>
-  </div>
-  <div class="image-container">
-  <div class="heading-cover">
-  <h1 class="heading">Your Zipcode + Our Analysis = Investment Success</h1>
-  </div>
-  <div class="heading-cover">
-  <h2 class="heading">Enter Zipcode to continue...</h2>
-  </div>
-  <form action="/parameters" class="zip-form" method="POST">
-    <label for="zipcode">Zip Code:</label>
-    <input type="text" id="zipcode" name="zipcode"><br><br>
-    <input type="submit" value="Submit">
-  </form>
-</div>
+
+    <div class="image-container">
+        <h1 class="heading"> Your Zipcode + Our Analysis = Perfect Investment</h1>
+        <h2 class="heading">Enter your Zipcode Below to start Analysis</h2>
+        <div class="form-container">
+        <form class="zip-form" action="/parameters" method="POST">
+            <label class="zip-label">Zipcode: </label>
+            <input type="text" name="zipcode" class="zip-input">
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+        </div>
+    </div>
 </body>
 </html>
