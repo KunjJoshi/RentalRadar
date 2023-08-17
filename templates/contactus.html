@@ -1,143 +1,214 @@
 <!DOCTYPE html>
-<html>
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <title>Contact Us - Rental Radar</title>
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='RentalRadar.jpeg') }}">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      margin: 0;
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Contact Us </title>
+  <link rel="stylesheet" href="/static/nicepage.css">
+<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='RentalRadar.jpeg') }}">
+<script class="u-script" type="text/javascript" src="/static/jquery.js" defer=""></script>
+<script class="u-script" type="text/javascript" src="/static/nicepage.js" defer=""></script>
+<meta name="generator" content="Nicepage 5.15.1, nicepage.com">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<meta name="referrer" content="origin">
+<link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+<link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Acme:400">
+<style>
+          /* Global styles */
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .image-container {
+            text-align: center;
+            padding: 20px;
+            height: 100vh;
+            border-radius: 10px;
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45)),url('/static/Big-Sur.jpg');
+            background-size: inherit;
+            background-position: center;
+            align-items: center;
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .info-container{
+          width: 40%;
+          max-width: 100%;
+          display: flex;
+          flex-direction: column;
+          background-color: #ffffff;
+          margin: 20px auto;
+          padding: 20px;
+          border-radius: 20px;
+          box-shadow: 5px 5px 5px 5px #000;
+        }
+
+        .obj-container{
+          width: 100%;
+          padding: 20px;
+          background-color: #000;
+          margin: 5px auto;
+          border-radius: 10px;
+          box-shadow: 2px 2px 2px 2px #d3d3d3;
+          overflow-x: auto;
+        }
+
+        .info-words{
+          font-size: large;
+          font-family: "Acme",sans-serif;
+          color: #fff;
+          max-width: 100%;
+        }
+
+        .email-submit-form{
+          width: 80%;
+          max-width: 100%;
+          background-color: aliceblue;
+          margin: 10px auto;
+          border-radius: 10px;
+          box-shadow: 5px 5px 5px 5px #000;
+          padding: 20px;
+        }
+
+        .contact-form{
+          width: 80%;
+          max-width: 100%;
+          display: flex;
+          flex-direction: column;
+          margin: 10px auto;
+          align-items: baseline;
+        }
+
+        .form-label{
+          font-family: "Roboto",sans-serif;
+          font-size: larger;
+          color: #000000;
+          margin: 20px;
+          font-weight: bold;
+        }
+
+        .form-input{
+          border: 1px bold #000000;
+          margin: 10px;
+          border-radius: 10px;
+          height: 3.5vh;
+          width: 45%;
+        }
+
+        .enquiry-input{
+          border: 1px bold #000000;
+          margin: 10px;
+          border-radius: 10px;
+          height: 8vh;
+          width: 45%;
+          overflow-y: auto;
+        }
+
+        .submit-btn{
+          margin: 10px;
+          width: 20%;
+          height: 6vh;
+          background-color: #007bfb;
+          color: #ffffff;
+          font-weight: bold;
+          font-size: larger;
+          border-radius: 10px;
+        }
+
+        .contact-heading{
+          font-family: "Acme",sans-serif;
+          font-size: 24px;
+          margin: 10px;
+        }
+
+        @media (max-width: 768px) {
+          .submit-btn{
+        width: 50%;
+      }
     }
 
-    .heading {
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-      color: #000;
-      text-align: center;
-      margin-top: 30px;
-    }
+    @media (max-width: 568px) {
+      .submit-btn{
+        width: 50%;
+      }
+      }
     
-    .navbar {
-  background-color: #007bff;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  padding: 1vh; /* 1% of viewport height */
-}
-
-.navbar-logo {
-  width: 5vh; /* 5% of viewport height */
-  height: 5vh; /* 5% of viewport height */
-  margin-right: 1vh; /* 1% of viewport height */
-}
-
-.navbar-title {
-  font-weight: bold;
-  font-size: 2vh; /* 2% of viewport height */
-  margin-right: auto;
-  color: #ffffff;
-}
-
-.navbar-button {
-  display: inline-block;
-  padding: 1vh 1.5vh; /* 1% of viewport height and 1.5% of viewport height */
-  margin-right: 1vh; /* 1% of viewport height */
-  border: none;
-  border-radius: 4px;
-  font-size: 1.6vh; /* 1.6% of viewport height */
-  font-weight: bold;
-  background-color: #007bff;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.navbar-button:hover {
-  background-color: #0056b3;
-}
-    
-    form {
-      max-width: 50%;
-      margin: 1.6vh auto;
-      padding: 2vh;
-      background-color: #ffffff;
-      border-radius: 5px;
-      box-shadow: 0 0 1vh rgba(0, 0, 0, 0.1);
-    }
-    
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 1.6vh;
-    }
-    
-    input[type="text"],
-    input[type="email"],
-    textarea {
-      width: 90%;
-      padding: 1.6vh;
-      font-size: 1.75vh;
-      border: 1px solid #cccccc;
-      border-radius: 4px;
-    }
-    
-    textarea {
-      resize: vertical;
-    }
-    
-    input[type="submit"] {
-      display: block;
-      width: 90%;
-      padding: 1.6vh;
-      font-size: 1.75vh;
-      font-weight: bold;
-      color: #ffffff;
-      background-color: #007bff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    
-    input[type="submit"]:hover {
-      background-color: #0056b3;
-    }
-  </style>
+</style>
 </head>
 <body>
-  <div class="navbar">
-    <img class="navbar-logo" src="{{ url_for('static', filename='RentalRadar.jpeg') }}" alt="Rental Radar Logo">
-    <a class="navbar-title" href="/index">Rental Radar</a>
-    <a href="/" class="navbar-button">Home</a>
-    <a href="/about-us" class="navbar-button">About Us</a>
-    <a href="/contact-us" class="navbar-button">Contact Us</a>
-    <a href="/mission" class="navbar-button">Mission</a>
-    <a href="/subscribe" class="navbar-button">Subscribe</a>
+  <header class="u-black u-clearfix u-header u-header" ><div class="u-clearfix u-sheet u-sheet-1">
+    <a href="/index" class="u-image u-logo u-image-1" data-image-width="1180" data-image-height="402" title="Home">
+      <img src="/static/RentalRadar.jpeg" class="u-logo-image u-logo-image-1">
+    </a>
+    <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
+      <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+        <a class="u-button-style u-custom-active-color u-custom-hover-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
+          <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+          <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</g></svg>
+        </a>
+      </div>
+      <div class="u-custom-menu u-nav-container">
+        <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/index" style="padding: 10px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/about-us" style="padding: 10px 20px;">About Us</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/mission" style="padding: 10px 20px;">Mission</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/contact-us" style="padding: 10px 20px;">Contact Us</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/subscribe" style="padding: 10px 20px;">Subscribe</a>
+</li></ul>
+      </div>
+      <div class="u-custom-menu u-nav-container-collapse">
+        <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+          <div class="u-inner-container-layout u-sidenav-overflow">
+            <div class="u-menu-close"></div>
+            <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/index">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/about-us">About Us</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/mission">Mission</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/contact-us">Contact Us</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/subscribe">Subscribe</a>
+</li></ul>
+          </div>
+        </div>
+        <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+      </div>
+    </nav>
+  </div></header>
+
+  <div class="image-container">
+    <div class="info-container">
+      <div class="obj-container">
+        <i class="fas fa-phone" style=" color: #ffffff; height: 50px; width: 50px;"></i>
+        <p class="info-words"><strong>Phone: </strong> +917096582792</p>
+      </div>
+      <div class="obj-container">
+        <i class="fas fa-envelope" style=" color: #ffffff; height: 50px; width: 50px;"></i>
+        <p class="info-words"><strong>Email: </strong> info@greenvibellc.com</p>
+      </div>
+    </div>
+
+    <div class="email-submit-form">
+      <h2 class="contact-heading">Contact Form</h2>
+      <form class="contact-form">
+        <label class="form-label" for="email"> Enter your Email Address: </label>
+        <input type="email" class="form-input" name="email">
+        <label class="form-label" for="name">Enter Your Name: </label>
+        <input type="text" class="form-input" name="name">
+        <label class="form-label" for="enquiry">Enter Your Enquiry: </label>
+        <input type="text" class="enquiry-input" name="enquiry">
+        <button class="submit-btn" type="submit">Submit</button>
+      </form>
+    </div>
   </div>
 
-  <h1 class="heading">Contact Us</h1>
-  
-  <div class="contact-info">
-    <p><strong>Location:</strong> 2913, W Castle Pines Ter, Dublin, CA, 94568</p>
-    <p><strong>Phone:</strong> +917096582792</p>
-    <p><strong>Email:</strong> shyam@greenvibellc.com</p>
-  </div>
 
-  <h3 class="heading">Get in Touch</h3>
-
-  <form action="/send-email" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-
-    <label for="enquiry">Enquiry:</label>
-    <textarea id="enquiry" name="enquiry" rows="5" required></textarea>
-
-    <input type="submit" value="Submit">
-  </form>
 </body>
-</html>

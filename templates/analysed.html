@@ -1,124 +1,112 @@
 <!DOCTYPE html>
-<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analysed Property</title>
+<link rel="stylesheet" href="/static/nicepage.css">
+<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='RentalRadar.jpeg') }}">
+<script class="u-script" type="text/javascript" src="/static/jquery.js" defer=""></script>
+<script class="u-script" type="text/javascript" src="/static/nicepage.js" defer=""></script>
+<meta name="generator" content="Nicepage 5.15.1, nicepage.com">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta name="referrer" content="origin">
+<link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+<link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Acme:400">
+<style>
+                  body, h1, h2, p, ul, li {
+            margin: 0;
+            padding: 0;
+        }
 
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            line-height: 1.6;
+        }
 
-  <title>Property Analysis</title>
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='RentalRadar.jpeg') }}">
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0DBNCK7C98"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-  gtag('config', 'G-0DBNCK7C98');
-</script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 20px;
-    }
-    
-    h1 {
-      color: #333;
-      text-align: center;
-      margin-top: 30px;
-    }
-    
-    h3 {
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
-    
-    .navbar {
-  background-color: #007bff;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  padding: 1vh; /* 1% of viewport height */
-}
+        .image-container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45)),url('/static/Big-Sur.jpg');
+            background-size: inherit;
+            background-position: center;
+            align-items: center;
+            width: 100%;
+            overflow-x: auto;
+        }
+        .main-heading{
+          color: #ffffff;
+          font-size: 24px;
+          font-family: "Acme",sans-serif;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
 
-.navbar-logo {
-  width: 5vh; /* 5% of viewport height */
-  height: 5vh; /* 5% of viewport height */
-  margin-right: 1vh; /* 1% of viewport height */
-}
+        .data-container{
+          max-width:100%;
+          background-color: aliceblue;
+          padding: 20px;
+          margin: 10px auto;
+          border-radius: 20px;
+          box-shadow: 5px 5px 5px 5px #ffffff;
+        }
 
-.navbar-title {
-  font-weight: bold;
-  font-size: 2vh; /* 2% of viewport height */
-  margin-right: auto;
-  color: #ffffff;
-}
+        .property-info{
+          display: flex;
+          flex-direction: column;
+          margin: 10px;
+        align-items: baseline;        }
 
-.navbar-button {
-  display: inline-block;
-  padding: 1vh 1.5vh; /* 1% of viewport height and 1.5% of viewport height */
-  margin-right: 1vh; /* 1% of viewport height */
-  border: none;
-  border-radius: 4px;
-  font-size: 1.6vh; /* 1.6% of viewport height */
-  font-weight: bold;
-  background-color: #007bff;
-  color: #ffffff;
-  cursor: pointer;
-}
+        .property-info-label{
+          font-family: "Acme",sans-serif;
+          font-size: 20px;
+          font-weight: bold;
+          justify-content: flex-start;
+          align-self: baseline;
+        }
 
-.navbar-button:hover {
-  background-color: #0056b3;
-}
+        .property-info-value{
+          font-size: 18px;
+          text-align: justify;
+        }
 
+        .property-info-value-address{
+          font-weight: bold;
+          font-size: 25px;
+          text-align: justify;
+        }
 
-    .property-info {
-      margin-bottom: 1.6vh;
-    }
-
-    .property-info-label {
-      font-weight: bold;
-      margin-bottom: 1.6vh;
-    }
-
-    .property-info-value {
-      margin-bottom: 1.6vh;
-    }
-
-    .property-image {
-      text-align: center;
-      margin-bottom: 1.6vhpx;
-    }
-
-    .property-image img {
-      width: 50%;
-      height: 50%;
-      object-fit: initial;
-    }
-
-    .property-details-table {
+      .property-details-table {
       width: 60%;
       margin: 0 auto;
       border-collapse: collapse;
       border: 1px solid #333;
     }
 
-    .property-details-table td {
+      .property-details-table td {
       text-align: center;
-      margin: 1.6vh;
-      font-size: medium;
-      padding: 1.6vh;
+      margin: 10px;
+      font-size: 18px;
+      padding: 10px;
       border: 1px solid #333;
     }
 
     .property-details-table tr{
       text-align: center;
       font-size: medium;
-      padding: 1.6vh;
+      padding: 10px;
       border: 1px solid #333;
     }
 
@@ -131,6 +119,17 @@
       padding: 1.6vh;
       font-size: medium;
       border: 1px solid #333;
+    }
+
+    .property-image {
+      text-align: center;
+      margin-bottom: 1.6vhpx;
+    }
+
+    .property-image img {
+      width: 650px;
+      height: 400px;
+      object-fit: initial;
     }
 
     .graph-container {
@@ -189,207 +188,242 @@
       padding: 1.6vh;
       border: 1px solid #333;
     }
-  </style>
+
+</style>
 </head>
 <body>
-  <div class="navbar">
-    <img class="navbar-logo" href="/" src="{{ url_for('static', filename='RentalRadar.jpeg') }}" alt="Rental Radar Logo">
-    <a class="navbar-title" href="/index">Rental Radar</a>
-    <a href="/about-us" class="navbar-button">About Us</a>
-    <a href="/contact-us" class="navbar-button">Contact Us</a>
-    <a href="/mission" class="navbar-button">Mission</a>
-    <a href="/subscribe" class="navbar-button">Subscribe</a>
-  </div>
+  <header class="u-black u-clearfix u-header u-header" ><div class="u-clearfix u-sheet u-sheet-1">
+    <a href="/index" class="u-image u-logo u-image-1" data-image-width="1180" data-image-height="402" title="Home">
+      <img src="/static/RentalRadar.jpeg" class="u-logo-image u-logo-image-1">
+    </a>
+    <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
+      <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+        <a class="u-button-style u-custom-active-color u-custom-hover-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
+          <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+          <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</g></svg>
+        </a>
+      </div>
+      <div class="u-custom-menu u-nav-container">
+        <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/index" style="padding: 10px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/about-us" style="padding: 10px 20px;">About Us</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/mission" style="padding: 10px 20px;">Mission</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/contact-us" style="padding: 10px 20px;">Contact Us</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/subscribe" style="padding: 10px 20px;">Subscribe</a>
+</li></ul>
+      </div>
+      <div class="u-custom-menu u-nav-container-collapse">
+        <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+          <div class="u-inner-container-layout u-sidenav-overflow">
+            <div class="u-menu-close"></div>
+            <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/index">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/about-us">About Us</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/mission">Mission</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/contact-us">Contact Us</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/subscribe">Subscribe</a>
+</li></ul>
+          </div>
+        </div>
+        <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+      </div>
+    </nav>
+  </div></header>
 
-  <h1>Property Analysis</h1>
+  <div class="image-container">
+    <h1 class="main-heading">Property Analysis</h1>
+
+    <div class="data-container">
   
-  <div class="property-info">
-    <p class="property-info-label">Address:</p>
-    <p class="property-info-value">{{ properties.address }}</p>
-    
-    <p class="property-info-label">Description:</p>
-    <p class="property-info-value">{{ properties.description }}</p>
-    
-    <h3>Property Details</h3>
-    
-    <table class="property-details-table">
-      <tr>
-        <th>Rent</th>
-        <td>{{ properties.rent }} USD</td>
-      </tr>
-      <tr>
-        <th>Beds</th>
-        <td>{{ properties.beds }}</td>
-      </tr>
-      <tr>
-        <th>Baths</th>
-        <td>{{ properties.baths }}</td>
-      </tr>
-      <tr>
-        <th>Property Tax</th>
-        <td>{{ properties.protax }}</td>
-      </tr>
-      <tr>
-        <th>Listed Price</th>
-        <td>{{ properties.list_price }}</td>
-      </tr>
-      <tr>
-        <th>Square Feet Area</th>
-        <td>{{ properties.sqft }} ft2</td>
-      </tr>
-      <tr>
-        <th>Amortized Over</th>
-        <td>{{ properties.amortized_over }}</td>
-      </tr>
-      <tr>
-        <th>You will Go Cash Flow Positive in </th>
-        <td>{{ properties.cflowpos }} Years</td>
-      </tr>
-      <tr>
-        <th>You will Go Rental ROI Positive in </th>
-        <td>{{ properties.rroipos }} Years</td>
-      </tr>
-    </table>
-  </div>
-  
-  <div class="property-image">
-    <img src="{{ properties.image }}" alt="Property Image">
-  </div>
-
-  <div class="table-container blue-heading">
-    <h2 style="text-align: center;">Amortization Table</h2>
-
-    <table class="property-table">
-      <tr class="heading-table">
-        <th>Year</th>
-        <th>Expenses</th>
-        <th>Income</th>
-        <th>Cash Flow</th>
-        <th>Rental ROI</th>
-        <th>Income ROI</th>
-        <th>Yearly ROI</th>
-        <th>Property Value</th>
-      </tr>
-      {% for index in range(properties.years | length) %}
-        <tr class="row-table">
-          <td class="column-table">{{ properties.years[index] }}</td>
-          <td class="column-table">{{ properties.expenses[index] }}</td>
-          <td class="column-table">{{ properties.income[index] }}</td>
-          <td class="column-table">{{ properties.cflow[index] }}</td>
-          <td class="column-table">{{ properties.rroi[index] }}</td>
-          <td class="column-table">{{ properties.iroi[index] }}</td>
-          <td class="column-table">{{ properties.yroi[index] }}</td>
-          <td class="column-table">{{ properties.pval[index] }}</td>
+    <div class="property-info">
+      <h2 class="property-info-label">Address:</h2>
+      <p class="property-info-value-address">{{ properties.address }}</p>
+      
+      <h2 class="property-info-label">Description:</h2>
+      <p class="property-info-value">{{ properties.description }}</p>
+      
+      <h2 class="property-info-label">Property Details</h2>
+      
+      <table class="property-details-table">
+        <tr>
+          <th>Rent</th>
+          <td>{{ properties.rent }} USD</td>
         </tr>
-      {% endfor %}
-    </table>
+        <tr>
+          <th>Beds</th>
+          <td>{{ properties.beds }}</td>
+        </tr>
+        <tr>
+          <th>Baths</th>
+          <td>{{ properties.baths }}</td>
+        </tr>
+        <tr>
+          <th>Property Tax</th>
+          <td>{{ properties.protax }}</td>
+        </tr>
+        <tr>
+          <th>Listed Price</th>
+          <td>{{ properties.list_price }}</td>
+        </tr>
+        <tr>
+          <th>Square Feet Area</th>
+          <td>{{ properties.sqft }} ft2</td>
+        </tr>
+        <tr>
+          <th>Amortized Over</th>
+          <td>{{ properties.amortized_over }}</td>
+        </tr>
+        <tr>
+          <th>You will Go Cash Flow Positive in </th>
+          <td>{{ properties.cflowpos }} Years</td>
+        </tr>
+        <tr>
+          <th>You will Go Rental ROI Positive in </th>
+          <td>{{ properties.rroipos }} Years</td>
+        </tr>
+      </table>
+    </div>
+    
+    <div class="property-image">
+      <img src="{{ properties.image }}" alt="Property Image">
+    </div>
+  
+    <div class="table-container blue-heading">
+      <h2 class="property-info-label">Amortization Table</h2>
+  
+      <table class="property-table">
+        <tr class="heading-table">
+          <th>Year</th>
+          <th>Expenses</th>
+          <th>Income</th>
+          <th>Cash Flow</th>
+          <th>Rental ROI</th>
+          <th>Income ROI</th>
+          <th>Yearly ROI</th>
+          <th>Property Value</th>
+        </tr>
+        {% for index in range(properties.years | length) %}
+          <tr class="row-table">
+            <td class="column-table">{{ properties.years[index] }}</td>
+            <td class="column-table">{{ properties.expenses[index] }}</td>
+            <td class="column-table">{{ properties.income[index] }}</td>
+            <td class="column-table">{{ properties.cflow[index] }}</td>
+            <td class="column-table">{{ properties.rroi[index] }}</td>
+            <td class="column-table">{{ properties.iroi[index] }}</td>
+            <td class="column-table">{{ properties.yroi[index] }}</td>
+            <td class="column-table">{{ properties.pval[index] }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  
+  <div class="graph-container">
+    <h2 class="property-info-label">Cash Flow Graph</h2>
+  
+    <div class="graph">
+      <canvas id="lineGraph" width="800" height="600"></canvas>
+    </div>
+  </div>
+  
+  <div class="graph-container">
+    <h2 class="property-info-label">ROI Graph</h2>
+  
+    <div class="graph">
+      <canvas id="roiGraph" width="800" height="600"></canvas>
+    </div>
+  </div>
+  
+  <form action="/subscribe">
+    <button type="submit" class="get-details-button">Get More Details</button>
+  </form>
+
   </div>
 
-<div class="graph-container">
-  <h2>Cash Flow Graph</h2>
-
-  <div class="graph">
-    <canvas id="lineGraph" width="800" height="600"></canvas>
-  </div>
-</div>
-
-<div class="graph-container">
-  <h2>ROI Graph</h2>
-
-  <div class="graph">
-    <canvas id="roiGraph" width="800" height="600"></canvas>
-  </div>
-</div>
-
-<form action="/subscribe">
-  <button type="submit" class="get-details-button">Get More Details</button>
-</form>
-
-<script>
-  // Extract the data from the properties JSON file
-  const yearsData = JSON.parse('{{ properties.years | tojson | safe }}');
-  const cflowData = JSON.parse('{{ properties.cflow | tojson | safe }}');
-  const iroiData = JSON.parse('{{ properties.iroi | tojson | safe }}');
-  const rroiData = JSON.parse('{{ properties.rroi | tojson | safe }}');
-
-  // Create the amortization line graph
-  const lineGraph = new Chart(document.getElementById("lineGraph"), {
-    type: "line",
-    data: {
-      labels: yearsData,
-      datasets: [{
-        label: "Cash Flow",
-        data: cflowData,
-        borderColor: "#007bff",
-        borderWidth: 2, // Adjust the line thickness
-        fill: false,
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        x: {
-          display: true,
-          title: {
+  
+  <script>
+    // Extract the data from the properties JSON file
+    const yearsData = JSON.parse('{{ properties.years | tojson | safe }}');
+    const cflowData = JSON.parse('{{ properties.cflow | tojson | safe }}');
+    const iroiData = JSON.parse('{{ properties.iroi | tojson | safe }}');
+    const rroiData = JSON.parse('{{ properties.rroi | tojson | safe }}');
+  
+    // Create the amortization line graph
+    const lineGraph = new Chart(document.getElementById("lineGraph"), {
+      type: "line",
+      data: {
+        labels: yearsData,
+        datasets: [{
+          label: "Cash Flow",
+          data: cflowData,
+          borderColor: "#007bff",
+          borderWidth: 2, // Adjust the line thickness
+          fill: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
             display: true,
-            text: "Years",
+            title: {
+              display: true,
+              text: "Years",
+            },
           },
-        },
-        y: {
-          display: true,
-          title: {
+          y: {
             display: true,
-            text: "Cash Flow",
+            title: {
+              display: true,
+              text: "Cash Flow",
+            },
           },
         },
       },
-    },
-  });
-
-  // Create the ROI line graph
-  const roiGraph = new Chart(document.getElementById("roiGraph"), {
-    type: "line",
-    data: {
-      labels: yearsData,
-      datasets: [
-        {
-          label: "Income ROI",
-          data: iroiData,
-          borderColor: "#abc941",
-          borderWidth: 2,
-          fill: false,
-        },
-        {
-          label: "Rental ROI",
-          data: rroiData,
-          borderColor: "#e74c3c",
-          borderWidth: 2,
-          fill: false,
-        },
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        x: {
-          display: true,
-          title: {
-            display: true,
-            text: "Years",
+    });
+  
+    // Create the ROI line graph
+    const roiGraph = new Chart(document.getElementById("roiGraph"), {
+      type: "line",
+      data: {
+        labels: yearsData,
+        datasets: [
+          {
+            label: "Income ROI",
+            data: iroiData,
+            borderColor: "#abc941",
+            borderWidth: 2,
+            fill: false,
           },
-        },
-        y: {
-          display: true,
-          title: {
+          {
+            label: "Rental ROI",
+            data: rroiData,
+            borderColor: "#e74c3c",
+            borderWidth: 2,
+            fill: false,
+          },
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
             display: true,
-            text: "ROI",
+            title: {
+              display: true,
+              text: "Years",
+            },
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: "ROI",
+            },
           },
         },
       },
-    },
-  });
-</script>
+    });
+  </script>
+  </div>
 </body>
-</html>

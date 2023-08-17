@@ -1,153 +1,190 @@
 <!DOCTYPE html>
-<html>
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Property Details</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enter Parameters</title>
+  <link rel="stylesheet" href="/static/nicepage.css">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='RentalRadar.jpeg') }}">
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0DBNCK7C98"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-0DBNCK7C98');
-</script>
+  <script class="u-script" type="text/javascript" src="/static/jquery.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="/static/nicepage.js" defer=""></script>
+  <meta name="generator" content="Nicepage 5.15.1, nicepage.com">
+  <meta name="referrer" content="origin">
+  <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Acme:400">
   <style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-  margin: 0;
-}
+            body, h1, h2, p, ul, li {
+            margin: 0;
+            padding: 0;
+        }
 
-h2 {
-  color: #333333;
-  text-align: center;
-  margin-top: 5vh; /* 5% of viewport height */
-}
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            line-height: 1.6;
+        }
 
-.navbar {
-  background-color: #007bff;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  padding: 1vh; /* 1% of viewport height */
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-.navbar-logo {
-  width: 5vh; /* 5% of viewport height */
-  height: 5vh; /* 5% of viewport height */
-  margin-right: 1vh; /* 1% of viewport height */
-}
+        .image-container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45)),url('/static/Big-Sur.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            align-items: center;
+        }
+        .form-container{
+            background-color: #f9f9f9;
+            max-width: 30%;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 2px 2px #ffffff;
+        }
 
-.navbar-title {
-  font-weight: bold;
-  font-size: 2vh; /* 2% of viewport height */
-  margin-right: auto;
-  color: #ffffff;
-}
+        .heading{
+          font-size: 24px;
+          font-family: "Acme",sans-serif;
+          font-weight: bold;
+        }
 
-.navbar-button {
-  display: inline-block;
-  padding: 1vh 1.5vh; /* 1% of viewport height and 1.5% of viewport height */
-  margin-right: 1vh; /* 1% of viewport height */
-  border: none;
-  border-radius: 4px;
-  font-size: 1.6vh; /* 1.6% of viewport height */
-  font-weight: bold;
-  background-color: #007bff;
-  color: #ffffff;
-  cursor: pointer;
-}
+        .params-form{
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 10px;
+          align-items: baseline;
+        }
 
-.navbar-button:hover {
-  background-color: #0056b3;
-}
+        .form-label{
+          font-family: "Acme",sans-serif;
+          font-size: 15px;
+        }
 
-form {
-  max-width: 40%; /* Adjusted max width */
-  margin: 5vh auto; /* 5% of viewport height */
-  padding: 2vh; /* 2% of viewport height */
-  background-color: #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 0 1vh rgba(0, 0, 0, 0.1); /* 1% of viewport height */
-  height: 70vh; /* 70% of viewport height */
-  align-items: center;
-}
+        .text-input{
+          flex: 1; /* Expand the input to take the available space */
+          padding: 8px;
+          border: 1px solid #d3d3d3;
+          border-radius: 4px;
+          width: 70%;
+          background-color: aliceblue;
+        }
+        
+        .submit-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            height: 4vh;
+            width: 30%;
+            font-size: larger;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 2vh; /* 2% of viewport height */
-}
+        .small-heading{
+          color: #ffffff;
+          font-size: 20px;
+          font-family: "Acme",sans-serif;
+        }
 
-input[type="number"] {
-  width: 90%; /* 80% of parent element width */
-  height: 3%; /* 10% of viewport height */
-  padding: 1vh; /* 1% of viewport height */
-  font-size: 1.6vh; /* 1.6% of viewport height */
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  margin: 0 auto; /* Center alignment */
-}
+        @media (max-width: 1200px) {
+      .form-container {
+        max-width: 50%;
+      }
+    }
 
-input[type="submit"] {
-  display: block;
-  width: 90%;
-  padding: 1vh; /* 1% of viewport height */
-  font-size: 1.6vh; /* 1.6% of viewport height */
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+    @media (max-width: 992px) {
+      .form-container {
+        max-width: 60%;
+      }
+    }
 
-.input[type="submit"]:hover {
-  background-color: #0056b3;
-}
-.heading{
-  text-align: center;
-  height: 3vh;
-  color: #000
-}
+    @media (max-width: 768px) {
+      .form-container {
+        max-width: 70%;
+      }
+    }
 
+    @media (max-width: 568px) {
+      .form-container {
+        max-width: 80%;
+      }
+    }
   </style>
 </head>
 <body>
-<div class="navbar">
-  <img class="navbar-logo" href="/" src="{{ url_for('static', filename='RentalRadar.jpeg') }}" alt="Rental Radar Logo">
-  <a class="navbar-title" href="/index">Rental Radar</a>
-  <a href="/about-us" class="navbar-button">About Us</a>
-  <a href="/contact-us" class="navbar-button">Contact Us</a>
-  <a href="/mission" class="navbar-button">Mission</a>
-  <a href="/subscribe" class="navbar-button">Subscribe</a>
-</div>
-
-  <h2>Property Details for {{zip}}</h2>
-  <form action="/listings" method="POST">
-    <input type="hidden" name="zipcode" value="{{zip}}">
-    <label>Percentage of Down Payment:</label>
-    <input type="number" id="down-payment" name="downpayment" placeholder="30" value="30" required><br><br>
-    <label>Current Mortgage Interest Rate:</label>
-    <input type="number" id="interest-rate" name="interest" step="0.01" placeholder="3.25" value="3.25" required><br><br>
-    <label>Property Tax Rate:</label>
-    <input type="number" id="property-tax" name="propertytax" step="0.01" placeholder="2.75"  value="2.75" required><br><br>
-    <label>Average Monthly Expenses:</label>
-    <input type="number" id="monthly-expenses" name="expense" placeholder="1000" value="1000" required><br><br>
-    <label>Increase % in Expenses:</label>
-    <input type="number" id="incr-exp" name="incr_exp" step="0.01" placeholder="10" value="10" required><br><br>
-    <label>Increase % in Rent Income:</label>
-    <input type="number" id="incr-inc" name="incr_inc" step="0.01" placeholder="7" value="7" required><br><br>
-    <label>Increase % in Property Value:</label>
-    <input type="number" id="incr-val" name="incr_val" step="0.01" placeholder="3" value="3" required><br><br>
-    <input type="submit" value="Submit">
-  </form>
   
-<h4 class="heading"> Obtaining Data about the listings might take some time. Please hold tight</h4>
-</body>
+  <header class="u-black u-clearfix u-header u-header" ><div class="u-clearfix u-sheet u-sheet-1">
+    <a href="/index" class="u-image u-logo u-image-1" data-image-width="1180" data-image-height="402" title="Home">
+      <img src="/static/RentalRadar.jpeg" class="u-logo-image u-logo-image-1">
+    </a>
+    <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
+      <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+        <a class="u-button-style u-custom-active-color u-custom-hover-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
+          <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+          <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</g></svg>
+        </a>
+      </div>
+      <div class="u-custom-menu u-nav-container">
+        <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/index" style="padding: 10px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/about-us" style="padding: 10px 20px;">About Us</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/mission" style="padding: 10px 20px;">Mission</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/contact-us" style="padding: 10px 20px;">Contact Us</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/subscribe" style="padding: 10px 20px;">Subscribe</a>
+</li></ul>
+      </div>
+      <div class="u-custom-menu u-nav-container-collapse">
+        <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+          <div class="u-inner-container-layout u-sidenav-overflow">
+            <div class="u-menu-close"></div>
+            <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/index">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/about-us">About Us</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/mission">Mission</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/contact-us">Contact Us</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/subscribe">Subscribe</a>
+</li></ul>
+          </div>
+        </div>
+        <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+      </div>
+    </nav>
+  </div></header>
 
-</html>
+  <div class="image-container">
+    <h3 class="small-heading">Parameters are used to calculate a rent estimate</h3>
+    <div class="form-container">
+      <h2 class="heading">Property Details for {{zip}}</h2>
+      <form action="/listings" method="POST" class="params-form">
+        <input type="hidden" name="zipcode" value="{{zip}}">
+        <label class="form-label">Percentage of Down Payment:</label>
+        <input class="text-input" type="number" id="down-payment" name="downpayment" placeholder="30" value="30" required><br><br>
+        <label class="form-label">Current Mortgage Interest Rate:</label>
+        <input class="text-input" type="number" id="interest-rate" name="interest" step="0.01" placeholder="6.5" value="6.5" required><br><br>
+        <label class="form-label">Property Tax Rate:</label>
+        <input class="text-input" type="number" id="property-tax" name="propertytax" step="0.01" placeholder="1.25"  value="1.25" required><br><br>
+        <label class="form-label">Average Monthly Expenses:</label>
+        <input class="text-input" type="number" id="monthly-expenses" name="expense" placeholder="500" value="500" required><br><br>
+        <label class="form-label">Increase % in Expenses:</label>
+        <input class="text-input" type="number" id="incr-exp" name="incr_exp" step="0.01" placeholder="10" value="10" required><br><br>
+        <label class="form-label">Increase % in Rent Income:</label>
+        <input class="text-input" type="number" id="incr-inc" name="incr_inc" step="0.01" placeholder="7" value="7" required><br><br>
+        <label class="form-label">Increase % in Property Value:</label>
+        <input class="text-input" type="number" id="incr-val" name="incr_val" step="0.01" placeholder="3" value="3" required><br><br>
+        <input class="submit-btn" type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+</body>

@@ -14843,6 +14843,8 @@ div.u-video,
 .u-nav,
 .u-nav-item {
   position: relative;
+  padding: 2%;
+  margin: auto;
 }
 .u-nav {
   display: inline-block;
@@ -42181,12 +42183,24 @@ a.u-link.u-text-hover-grey-90:hover {
 
 .u-header .u-menu-1 {
   margin: -43px -20px 27px auto;
+  padding: 20px;
 }
 
 .u-header .u-nav-1 {
   font-size: 1rem;
   letter-spacing: normal;
 }
+
+.u-nav-1 li {
+  /* Add margin between navigation items */
+  margin-right: 15px;
+}
+
+/* Adjust the margin of the last navigation item to avoid extra spacing */
+.u-nav-1 li:last-child {
+  margin-right: 0;
+}
+
 
 .u-header .u-nav-2 {
   font-size: 1rem;
@@ -42197,6 +42211,7 @@ a.u-link.u-text-hover-grey-90:hover {
     width: auto;
     margin-top: -43px;
     margin-right: -20px;
+    padding: 20px;
   }
 }
 

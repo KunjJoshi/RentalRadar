@@ -1,191 +1,239 @@
 <!DOCTYPE html>
-<html>
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Property Listings</title>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0DBNCK7C98"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-0DBNCK7C98');
-</script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listings</title>
+  <link rel="stylesheet" href="/static/nicepage.css">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='RentalRadar.jpeg') }}">
+  <script class="u-script" type="text/javascript" src="/static/jquery.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="/static/nicepage.js" defer=""></script>
+  <meta name="generator" content="Nicepage 5.15.1, nicepage.com">
+  <meta name="referrer" content="origin">
+  <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Acme:400">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      margin: 0;
-    }
-    
-    h1 {
-      color: #333333;
-      text-align: center;
-      margin-top: 1.6vh;
-    }
+                body, h1, h2, p, ul, li {
+            margin: 0;
+            padding: 0;
+        }
 
-    .navbar {
-  background-color: #007bff;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  padding: 1vh; /* 1% of viewport height */
-}
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            line-height: 1.6;
+        }
 
-.navbar-logo {
-  width: 5vh; /* 5% of viewport height */
-  height: 5vh; /* 5% of viewport height */
-  margin-right: 1vh; /* 1% of viewport height */
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-.navbar-title {
-  font-weight: bold;
-  font-size: 2vh; /* 2% of viewport height */
-  margin-right: auto;
-  color: #ffffff;
-}
+        .image-container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45)),url('/static/Big-Sur.jpg');
+            background-size: inherit;
+            background-position: center;
+            align-items: center;
+            width: 100%;
+            overflow-x: auto;
+        }
+        .main-heading{
+          color: #ffffff;
+          font-size: 24px;
+          font-family: "Acme",sans-serif;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
 
-.navbar-button {
-  display: inline-block;
-  padding: 1vh 1.5vh; /* 1% of viewport height and 1.5% of viewport height */
-  margin-right: 1vh; /* 1% of viewport height */
-  border: none;
-  border-radius: 4px;
-  font-size: 1.6vh; /* 1.6% of viewport height */
-  font-weight: bold;
-  background-color: #007bff;
-  color: #ffffff;
-  cursor: pointer;
-}
+        .listings-table{
+          width: 80%;
+          max-width: 100%;
+          margin: 0 auto;
+          background-color: aliceblue;
+          border-radius: 10px;
+          box-shadow: 5px 5px 5px 5px #ffffff;
+          padding: 20px;
+          font-size: 18px;
+        }
 
-.navbar-button:hover {
-  background-color: #0056b3;
-}
+        .listings-table td{
+          border-right: 1px solid #000;
+          padding: 5px;
+        }
 
-    .grid-image{
-      border-radius: 10px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+        .table-heading{
+          background-color: #000000;
+          color: #f1f1f1;
+          font-family: "Roboto",sans-serif;
+          font-size: 18px;
+          font-weight: bold;
+          padding: 5px;
+          margin: 0 2px;
+        }
 
-    .even-row{
-      background-color: #f2f2f2;
-    }
+        .submit-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            height: 4vh;
+            width: 100%;
+            font-weight: bold;
+            font-size: larger;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    .odd-row{
-      background-color: #ffffff;
-    }
+        .resp-image{
+          width: 80%;
+          max-width: 80%;
+          height: auto;
+        }
 
-    th, td {
-      border-bottom: 1px solid black;
-      padding: 1.6vh;
-    }
-
-    .table-heading{
-      color: #000000;
-      font-size: 2vh;
-      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-      font-weight: bold;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-
-    .table-item{
-      font-size: 1.8vh;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    button {
-      padding: 1.6vh;
-      font-size: 3vh;
-      font-weight: bold;
-      color: #ffffff;
-      background-color: #007bff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      height: 70%;
-      width: 100%;
+    /* Media queries */
+    @media (max-width: 1200px) {
+      .listings-table {
+        font-size: 16px;
+      }
     }
 
-    button:hover {
-      background-color: #0056b3;
+    @media (max-width: 992px) {
+      .listings-table {
+        font-size: 12px;
+      }
+
+      .table-heading {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .listings-table {
+        font-size: small;
+      }
+      .table-heading {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 568px) {
+      .listings-table {
+        font-size: small;
+      }
+      .table-heading {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="navbar">
-    <img class="navbar-logo" href="/" src="{{ url_for('static', filename='RentalRadar.jpeg') }}" alt="Rental Radar Logo">
-    <a class="navbar-title" href="/index">Rental Radar</a>
-    <a href="/about-us" class="navbar-button">About Us</a>
-    <a href="/contact-us" class="navbar-button">Contact Us</a>
-    <a href="/mission" class="navbar-button">Mission</a>
-    <a href="/subscribe" class="navbar-button">Subscribe</a>
-  </div>
 
-  <h1>Property Listings</h1>
-  <table>
-    <thead>
-      <tr>
-        <th class="table-heading">House</th>
-        <th class="table-heading">Address</th>
-        <th class="table-heading">SqFt</th>
-        <th class="table-heading">Price</th>
-        <th class="table-heading"># Beds</th>
-        <th class="table-heading"># Baths</th>
-        <th class="table-heading">Cash Flow Positive In </th>
-        <th class="table-heading">Rent ROI Positive In</th>
-        <th class="table-heading">Rent Estimate</th>
-        <th class="table-heading">Analyse</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for res in result %}
-      <tr>
-        <td class="grid-image"><img src="{{res ['image_url'] }}" alt="Property Image" width="150" height="150"></td>
-        <td class="table-item"><strong>{{ res['address_line'] }}</strong></td>
-        <td class="table-item">{{ res['sqft'] }}</td>
-        <td class="table-item">${{ res['list_price'] }}</td>
-        <td class="table-item">{{ res['beds'] }}</td>
-        <td class="table-item">{{ res['baths_full'] }}</td>
-        <td class="table-item">{{res ['cflow_positive']}} years</td>
-        <td class="table-item">{{res['rroi_positive']}} years</td>
-        <td class="table-item">${{ res['rent_estimate'] }}</td>
-        <td>
-          <form action="/analyse" method="POST">
-            <input type="hidden" name="id" value="{{ res['index'] }}">
-            <input type="hidden" name="address" value="{{ res['address_line']}}"> 
-            <input type="hidden" name="sqft" value="{{ res['sqft']}}">
-            <input type="hidden" name="beds" value="{{ res['beds']}}">
-            <input type="hidden" name="baths" value="{{ res['baths_full']}}">
-            <input type="hidden" name="rent" value="{{ res['rent_estimate']}}">
-            <input type="hidden" name="list_price" value="{{ res['list_price']}}">
-            <input type="hidden" name="protax" value="{{ res['property_tax']}}">
-            <input type="hidden" name="description" value="{{ res['description']}}">
-            <input type="hidden" name="image" value="{{ res['image_url']}}">
-            <input type="hidden" name="invest_amount" value="{{ res['invest_amount'] }}">
-            <input type="hidden" name="monthly_exp" value="{{ res['monthly_exp'] }}">
-            <input type="hidden" name="years" value="{{ res['years'] }}">
-            <input type="hidden" name="expenses" value="{{ res['expenses'] }}">
-            <input type="hidden" name="income" value="{{ res['income'] }}">
-            <input type="hidden" name="cflow" value="{{ res['cflow'] }}">
-            <input type="hidden" name="rroi" value="{{ res['rroi'] }}">
-            <input type="hidden" name="pval" value="{{ res['pval'] }}">
-            <input type="hidden" name="iroi" value="{{ res['iroi'] }}">
-            <input type="hidden" name="yroi" value="{{ res['yroi'] }}">
-            <button type="submit">Analyse</button>
-          </form>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <header class="u-black u-clearfix u-header u-header" ><div class="u-clearfix u-sheet u-sheet-1">
+    <a href="/index" class="u-image u-logo u-image-1" data-image-width="1180" data-image-height="402" title="Home">
+      <img src="/static/RentalRadar.jpeg" class="u-logo-image u-logo-image-1">
+    </a>
+    <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
+      <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+        <a class="u-button-style u-custom-active-color u-custom-hover-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
+          <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+          <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</g></svg>
+        </a>
+      </div>
+      <div class="u-custom-menu u-nav-container">
+        <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/index" style="padding: 10px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/about-us" style="padding: 10px 20px;">About Us</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/mission" style="padding: 10px 20px;">Mission</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/contact-us" style="padding: 10px 20px;">Contact Us</a>
+</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/subscribe" style="padding: 10px 20px;">Subscribe</a>
+</li></ul>
+      </div>
+      <div class="u-custom-menu u-nav-container-collapse">
+        <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+          <div class="u-inner-container-layout u-sidenav-overflow">
+            <div class="u-menu-close"></div>
+            <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/index">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/about-us">About Us</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/mission">Mission</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/contact-us">Contact Us</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/subscribe">Subscribe</a>
+</li></ul>
+          </div>
+        </div>
+        <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+      </div>
+    </nav>
+  </div></header>
+
+
+  <div class="image-container">
+    <h1 class="main-heading">Property Listings</h1>
+    <table class="listings-table">
+      <thead>
+        <tr>
+          <th class="table-heading">House</th>
+          <th class="table-heading">Address</th>
+          <th class="table-heading">SqFt</th>
+          <th class="table-heading">Price</th>
+          <th class="table-heading"># Beds</th>
+          <th class="table-heading"># Baths</th>
+          <th class="table-heading">Cash Flow Positive In </th>
+          <th class="table-heading">Rent ROI Positive In</th>
+          <th class="table-heading">Rent Estimate</th>
+          <th class="table-heading">Analyse</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for res in result %}
+        <tr>
+          <td class="grid-image"><img src="{{res ['image_url'] }}" alt="Property Image" height="150" width="250"></td>
+          <td class="table-item"><strong>{{ res['address_line'] }}</strong></td>
+          <td class="table-item">{{ res['sqft'] }} ft2</td>
+          <td class="table-item">${{ res['list_price'] }}</td>
+          <td class="table-item">{{ res['beds'] }}</td>
+          <td class="table-item">{{ res['baths_full'] }}</td>
+          <td class="table-item">{{res ['cflow_positive']}} years</td>
+          <td class="table-item">{{res['rroi_positive']}} years</td>
+          <td class="table-item">${{ res['rent_estimate'] }}</td>
+          <td>
+            <form action="/analyse" method="POST">
+              <input type="hidden" name="id" value="{{ res['index'] }}">
+              <input type="hidden" name="address" value="{{ res['address_line']}}"> 
+              <input type="hidden" name="sqft" value="{{ res['sqft']}}">
+              <input type="hidden" name="beds" value="{{ res['beds']}}">
+              <input type="hidden" name="baths" value="{{ res['baths_full']}}">
+              <input type="hidden" name="rent" value="{{ res['rent_estimate']}}">
+              <input type="hidden" name="list_price" value="{{ res['list_price']}}">
+              <input type="hidden" name="protax" value="{{ res['property_tax']}}">
+              <input type="hidden" name="description" value="{{ res['description']}}">
+              <input type="hidden" name="image" value="{{ res['image_url']}}">
+              <input type="hidden" name="invest_amount" value="{{ res['invest_amount'] }}">
+              <input type="hidden" name="monthly_exp" value="{{ res['monthly_exp'] }}">
+              <input type="hidden" name="years" value="{{ res['years'] }}">
+              <input type="hidden" name="expenses" value="{{ res['expenses'] }}">
+              <input type="hidden" name="income" value="{{ res['income'] }}">
+              <input type="hidden" name="cflow" value="{{ res['cflow'] }}">
+              <input type="hidden" name="rroi" value="{{ res['rroi'] }}">
+              <input type="hidden" name="pval" value="{{ res['pval'] }}">
+              <input type="hidden" name="iroi" value="{{ res['iroi'] }}">
+              <input type="hidden" name="yroi" value="{{ res['yroi'] }}">
+              <button class="submit-btn" type="submit">Analyse</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
