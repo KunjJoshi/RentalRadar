@@ -1,0 +1,72 @@
+  .navbar {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    flex:1;
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+  
+  .links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+  
+  .hamburger {
+    display: none;
+    cursor: pointer;
+  }
+
+  .dropdown{
+    display: none;
+  }
+  
+  .bar {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+  }
+  
+  @media (max-width: 1024px) {
+    .links {
+      display: none;
+    }
+  
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .dropdown {
+      display: none;
+      flex-direction: column;
+      background-color: black;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 100%;
+    }
+  
+    .dropdown.active {
+      display: flex;
+    }
+  
+    .dropdown a {
+      color: white;
+      text-align: center;
+      padding: 10px;
+      text-decoration: none;
+    }
+  }

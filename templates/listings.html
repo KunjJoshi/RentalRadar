@@ -4,12 +4,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Listings</title>
-  <link rel="stylesheet" href="/static/nicepage.css">
+  <link rel="stylesheet" href="/static/navbar.css">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='RentalRadar.jpeg') }}">
-  <script class="u-script" type="text/javascript" src="/static/jquery.js" defer=""></script>
-  <script class="u-script" type="text/javascript" src="/static/nicepage.js" defer=""></script>
-  <meta name="generator" content="Nicepage 5.15.1, nicepage.com">
-  <meta name="referrer" content="origin">
   <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
   <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Acme:400">
   <style>
@@ -24,6 +20,9 @@
             background-color: #f7f7f7;
             color: #333;
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
@@ -32,6 +31,11 @@
             padding: 20px;
         }
 
+        .flexbar{
+          display: flex;
+          flex:10;
+          width: 100%;
+        }
         .image-container {
             text-align: center;
             padding: 20px;
@@ -42,6 +46,7 @@
             align-items: center;
             width: 100%;
             overflow-x: auto;
+            flex: 90;
         }
         .main-heading{
           color: #ffffff;
@@ -120,6 +125,7 @@
     @media (max-width: 768px) {
       .listings-table {
         font-size: small;
+        margin: 10px 0;
       }
       .table-heading {
         font-size: 14px;
@@ -129,6 +135,11 @@
     @media (max-width: 568px) {
       .listings-table {
         font-size: small;
+        margin: 10px 0;
+        padding: 0;
+      }
+      .image-container{
+        padding:0;
       }
       .table-heading {
         font-size: 12px;
@@ -138,42 +149,41 @@
 </head>
 <body>
 
-  <header class="u-black u-clearfix u-header u-header" ><div class="u-clearfix u-sheet u-sheet-1">
-    <a href="/index" class="u-image u-logo u-image-1" data-image-width="1180" data-image-height="402" title="Home">
-      <img src="/static/RentalRadar.jpeg" class="u-logo-image u-logo-image-1">
-    </a>
-    <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
-      <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
-        <a class="u-button-style u-custom-active-color u-custom-hover-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
-          <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
-          <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
-</g></svg>
-        </a>
+
+  <div class="flexbar">
+    <nav class="navbar">
+      <div class="logo">
+        <img src="/static/RentalRadar.jpeg" alt="RentalRadar Logo">
       </div>
-      <div class="u-custom-menu u-nav-container">
-        <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/index" style="padding: 10px 20px;">Home</a>
-</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/about-us" style="padding: 10px 20px;">About Us</a>
-</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/mission" style="padding: 10px 20px;">Mission</a>
-</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/contact-us" style="padding: 10px 20px;">Contact Us</a>
-</li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-white u-nav-link u-text-active-black u-text-hover-palette-1-base" href="/subscribe" style="padding: 10px 20px;">Subscribe</a>
-</li></ul>
+      <div class="links">
+        <a class="nav-links" href="/index">Home</a>
+        <a class="nav-links" href="about-us">About us</a>
+        <a class="nav-links" href="/mission">Mission</a>
+        <a class="nav-links" href="/contact-us">Contact us</a>
+        <a class="nav-links" href="/subscribe">Subscribe</a>
       </div>
-      <div class="u-custom-menu u-nav-container-collapse">
-        <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-          <div class="u-inner-container-layout u-sidenav-overflow">
-            <div class="u-menu-close"></div>
-            <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/index">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/about-us">About Us</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/mission">Mission</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/contact-us">Contact Us</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/subscribe">Subscribe</a>
-</li></ul>
-          </div>
-        </div>
-        <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+      <div class="hamburger">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
       </div>
     </nav>
-  </div></header>
+    <div class="dropdown">
+      <a href="/index">Home</a>
+      <a href="/about-us">About us</a>
+      <a href="/mission">Mission</a>
+      <a href="/contact-us">Contact us</a>
+      <a href="/subscribe">Subscribe</a>
+    </div>
+    <script >
+      const hamburger = document.querySelector(".hamburger");
+  const dropdown = document.querySelector(".dropdown");
+  
+  hamburger.addEventListener("click", () => {
+    dropdown.classList.toggle("active");
+  });
+    </script>
+  </div>
 
 
   <div class="image-container">
