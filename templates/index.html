@@ -217,7 +217,7 @@
         <div class="form-container">
             <form class="zip-form" action="/parameters" method="POST">
                 <label class="zip-label">Zipcode: </label>
-                <input type="text" name="zipcode" class="zip-input">
+                <input type="text" pattern="\d{5}" title="Please enter a 5-digit numerical zipcode" name="zipcode" class="zip-input" required>
                 <button type="submit" class="submit-btn">Submit</button>
             </form>
         </div>
