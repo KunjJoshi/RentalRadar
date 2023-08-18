@@ -21,6 +21,12 @@
     color: white;
     text-decoration: none;
     margin-left: 20px;
+    padding: 20px;
+  }
+
+  .links a:hover{
+    color: black;
+    background-color: white;
   }
   
   .hamburger {
