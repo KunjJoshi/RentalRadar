@@ -27,6 +27,7 @@
   .links a:hover{
     color: black;
     background-color: white;
+    transition: all 0.2s ease-out;
   }
   
   .hamburger {
