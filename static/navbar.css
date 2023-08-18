@@ -6,6 +6,7 @@
     align-items: center;
     padding: 10px 20px;
     flex:1;
+    width: 100%
   }
   
   .logo img {
@@ -47,6 +48,9 @@
   }
   
   @media (max-width: 1024px) {
+    .logo img{
+      height: 200px;
+    }
     .links {
       display: none;
     }

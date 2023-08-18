@@ -18,6 +18,10 @@
 <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
 <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Acme:400">
 <style>
+                      body, h1, h2, p, ul, li {
+            margin: 0;
+            padding: 0;
+        }
             /* Global styles */
             body {
             font-family: Arial, sans-serif;
@@ -38,18 +42,15 @@
           flex: 10;
           display: flex;
         }
-
+        /* Image container styles */
         .image-container {
             text-align: center;
             padding: 20px;
             border-radius: 10px;
             background-image: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.45)),url('/static/Big-Sur.jpg');
-            background-size: inherit;
+            background-size: cover;
             background-position: center;
-            align-items: center;
-            width: 100%;
-            overflow-x: auto;
-            flex: 90;
+            flex: 95;
         }
 
         .main-heading{
