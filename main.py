@@ -92,7 +92,7 @@ def calculate_rent_adjustment(bedrooms,sqft,baths,delta_rent):
       rent_adj = (sqft - 700) * delta_sqft
       rent_adj += (baths - 1) * (delta_rent * 0.2)
   elif(int(bedrooms) == 2): 
-      delta_sqft = delta_rent*8/700
+      delta_sqft = delta_rent*0.8/700
       rent_adj = (sqft - 1400) * delta_sqft
       rent_adj += (baths - 2) * (delta_rent * 0.2)
   elif(int(bedrooms) == 3): 
@@ -104,10 +104,10 @@ def calculate_rent_adjustment(bedrooms,sqft,baths,delta_rent):
       rent_adj = (sqft - 2500) * delta_sqft
       rent_adj += (baths - 2) * (delta_rent * 0.3)
   elif(int(bedrooms) > 4): 
-      delta_sqft = delta_rent*0.7/900
+      delta_sqft = delta_rent*0.5/900
       rent_adj = (sqft - 3400) * delta_sqft
-      rent_adj += (baths - 4) * (delta_rent * 0.15)
-      rent_adj += (bedrooms - 5) * (delta_rent * 0.35)
+      rent_adj += (baths - 4) * (delta_rent * 0.25)
+      rent_adj += (bedrooms - 5) * (delta_rent * 0.25)
     #print (f"Adjusted rent: {rent_adj} {delta_rent} {bedrooms} {baths} {sqft}")  
   return round(rent_adj, 2)
 

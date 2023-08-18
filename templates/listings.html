@@ -67,13 +67,20 @@
           box-shadow: 5px 5px 5px 5px #ffffff;
           padding: 20px;
           font-size: 18px;
+          border-collapse: collapse;
         }
 
+        .listings-table tr,
+        .listings-table th,
         .listings-table td{
-          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
           padding: 5px;
         }
 
+        .prop-image{
+          width:200px;
+          height: 150px;
+        }
         .table-heading{
           background-color: #000000;
           color: #f1f1f1;
@@ -130,6 +137,11 @@
       .table-heading {
         font-size: 14px;
       }
+
+      .prop-image{
+        width: 100px;
+        height: 50px;
+      }
     }
 
     @media (max-width: 568px) {
@@ -143,6 +155,11 @@
       }
       .table-heading {
         font-size: 12px;
+      }
+
+      .prop-image{
+        width: 75px;
+        height: 40px;
       }
     }
   </style>
@@ -206,7 +223,7 @@
       <tbody>
         {% for res in result %}
         <tr>
-          <td class="grid-image"><img src="{{res ['image_url'] }}" alt="Property Image" height="150" width="250"></td>
+          <td class="grid-image"><img src="{{res ['image_url'] }}" alt="Property Image" class="prop-image"></td>
           <td class="table-item"><strong>{{ res['address_line'] }}</strong></td>
           <td class="table-item">{{ res['sqft'] }} ft2</td>
           <td class="table-item">${{ res['list_price'] }}</td>
