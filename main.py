@@ -28,7 +28,7 @@ def send_request(endpoint, params):
     }
     print('Calling API Now')
     response = requests.get(url, headers=headers, params=params)
-    print(response)
+    print(response.content)
     return response
 
 def get_property_records(address):
@@ -85,9 +85,14 @@ def get_rental_market_data(zipcode):
    params={}
    response=send_request(endpoint=endpoint,params=params)
    print(response)
-   return response.json()
+   try:
+      return response.json()
+   except:
+      return ''
 
 def calculate_rent_adjustment(bedrooms,sqft,baths,delta_rent):
+  if(int(bedrooms)<1):
+     rent_adj=0
   if(int(bedrooms) == 1):
       delta_sqft = delta_rent*0.8/700
       rent_adj = (sqft - 700) * delta_sqft
@@ -113,7 +118,7 @@ def calculate_rent_adjustment(bedrooms,sqft,baths,delta_rent):
   return round(rent_adj, 2)
 
 def derive_rental_estimate(address,bedroom,baths,sqft,rental_list):
-   #print(bedroom)
+   print(bedroom)
    rent_estimate=0
    idx=0
    static_idx=0
@@ -138,6 +143,10 @@ def derive_rental_estimate(address,bedroom,baths,sqft,rental_list):
     delta_rent = (delta_rent1 + delta_rent2)/2
    #print(delta_rent)
    rent_estimate = rental_list[idx]['averageRent']
+   print('Bedroom',bedroom)
+   print('Bathroom',baths)
+   print('SQFT',sqft)
+
    rent_estimate += round(calculate_rent_adjustment(int(bedroom), int(sqft),int(baths), float(delta_rent))) 
    #print (f"{address} {idx} {delta_rent} {rent_estimate}")
    return rent_estimate 
@@ -183,9 +192,8 @@ def generate_rental_potentials(zipcode):
   #print(listings['message'])
   #exit(listings['status'])
   rdata=get_rental_market_data(zipcode)
-  print('RData retreived successfully')
-  print(rdata)
-  for rental in rdata['rentalData']['detailed']:
+  if rdata!='':
+   for rental in rdata['rentalData']['detailed']:
      decoded_rent={
         'bedrooms':rental['bedrooms'],
         'averageRent':rental['averageRent'],
@@ -195,7 +203,17 @@ def generate_rental_potentials(zipcode):
      }
      rental_list.append(decoded_rent)
   #print(rental_list)
-  return rental_list,results
+     return rental_list,results
+  else:
+     decoded_rent={
+        'bedrooms':0,
+        'averageRent':0,
+        'minRent':0,
+        'maxRent':0,
+        'totalRentals':0
+     }
+     rental_list.append(decoded_rent)
+     return rental_list,results
 
 def collect_research_params(zipcode,downpayment,interest,propertytax,expense):
     exp_ratio = float(expense)
@@ -299,35 +317,60 @@ def collect_property_data(research,incr_exp,incr_val,incr_inc):
   #print(results)
   down_payment = research['down_payment']
   int_rate = research['interest_rate']
-  print(results[0])
+  print(len(results))
   
   for listing in results:
       address = listing['location']['address']['line']
       city = listing['location']['address']['city']
       state_code = listing['location']['address']['state_code']
-      postal_code = listing['location']['address']['postal_code']
-      if(postal_code == None): 
+      try:
+       postal_code = listing['location']['address']['postal_code']
+       if postal_code==None:
+          postal_code="00000"
+      except: 
         postal_code = "00000"
-      sqft = listing['description']['sqft']
-      if(sqft == None):
+      try:
+       sqft = listing['description']['sqft']
+       if sqft==None:
+          sqft=0
+      except:
+        print('SQFT Exception')
         sqft = 0
-      beds = listing['description']['beds']
-      if(beds == None):
+      try:
+       beds = listing['description']['beds']
+       if beds==None:
+          beds=0
+      except:
         beds = 0
-      baths_full = listing['description']['baths_full']
-      if(baths_full == None):
+      try:
+       baths_full = listing['description']['baths_full']
+       if baths_full==None:
+          baths_full=0
+      except:
         baths_full = 0
-      property_type = listing['description']['type']
-      if(property_type == None):
+      try:
+       property_type = listing['description']['type']
+       if property_type==None:
+          property_type="Single Family"
+      except:
         property_type = "Single Family"
-      list_price = listing['list_price']
-      if(list_price == None):
+      try:
+        list_price = listing['list_price']
+        if list_price==None:
+           list_price=0
+      except:
           list_price = 0
-      desc=listing['description']['text']
-      if desc==None:
+      try:
+       desc=listing['description']['text']
+       if desc==None:
+          desc=''
+      except:
          desc=''
-      img_url=listing['primary_photo']['href']
-      if img_url==None:
+      try:
+       img_url=listing['primary_photo']['href']
+       if img_url==None:
+          img_url='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png'
+      except:
          img_url='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png'
       address_line = get_address_line(address, city, state_code, postal_code)
       #print(f"List price: {list_price}, Down payment: {down_payment}, Interest rate: {int_rate}")

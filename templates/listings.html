@@ -234,13 +234,21 @@
         <tr>
           <td class="grid-image"><img src="{{res ['image_url'] }}" alt="Property Image" class="prop-image"></td>
           <td class="table-item"><strong>{{ res['address_line'] }}</strong></td>
-          <td class="table-item">{{ res['sqft'] }} ft2</td>
+          {% if res['sqft'] == 0.0 %}
+          <td class="table-item">Data Unavailable</td>
+          {% else %}
+          <td class="table-item">{{res['sqft']}} ft2</td>
+          {% endif %}
           <td class="table-item">${{ res['list_price'] }}</td>
           <td class="table-item">{{ res['beds'] }}</td>
           <td class="table-item">{{ res['baths_full'] }}</td>
           <td class="table-item">{{res ['cflow_positive']}} years</td>
           <td class="table-item">{{res['rroi_positive']}} years</td>
+          {% if res['rent_estimate']==0.0 %}
+          <td class="table-item">Data Unavailable</td>
+          {% else %}
           <td class="table-item">${{ res['rent_estimate'] }}</td>
+          {% endif %}
           <td>
             <form action="/analyse" method="POST">
               <input type="hidden" name="id" value="{{ res['index'] }}">
