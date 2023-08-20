@@ -4,7 +4,7 @@ import time
 from mortgage import amortization_schedule
 import pandas as pd
 
-API_KEY = "f8afd74a7dmsh8feb825ecf24206p1f7ef5jsnb0b19e15db3b"
+API_KEY = "8de5a7ba9cmsh2858fb246877cc3p10d9e6jsnfe5932cb3231"
 HOST = "realty-mole-property-api.p.rapidapi.com"
 US_HOST = "us-real-estate.p.rapidapi.com"
 US_RE_HOST = "us-real-estate-listings.p.rapidapi.com"
@@ -17,42 +17,36 @@ research_params = {
   "property_tax" : 1.2,
   "expense_ratio" : 0
 }
-
 def send_request(endpoint, params):
     url = f"https://{HOST}/{endpoint}"
-
     headers = {
         "content-type": "application/octet-stream",
         "X-RapidAPI-Key": API_KEY,
         "X-RapidAPI-Host": HOST,
     }
-
+    print('Calling API Now')
     response = requests.get(url, headers=headers, params=params)
-    print(response.content)
+    print(response)
     return response
 
 def get_property_records(address):
     endpoint = "properties"
     params = {"address": address}
     return send_request(endpoint, params)
-
 def get_property_sale_price(address):
     endpoint = "salePrice"
     params = {"address": address}
     return send_request(endpoint, params)
-
 def get_property_rental_price(address):
     endpoint = "rentalPrice"
     params = {"address": address}
     return send_request(endpoint, params)
-
 def get_property_listings(zipcode):
     endpoint = "saleListings"
     params = {"zipCode":zipcode, "propertyType":"Single Family", "limit":"10"}
     response = send_request(endpoint, params)
     data = json.loads(response.content.decode('utf-8'))
     return data['data']['home_search']['results']
-
 def get_property_for_sale_by_location(location):
     endpoint = "for-sale"
     params = {"location":location,"offset":"0","limit":"50", "property_type":"single_family"}
@@ -66,7 +60,6 @@ def get_property_for_sale_by_location(location):
   
     #print (response.content)
     return json.loads(response.content.decode('utf-8'))
-
 def get_property_for_sale(zipcode):
     endpoint = "v2/for-sale-by-zipcode"
     params = {"zipcode":zipcode,"offset":"0","limit":"42", "property_type":"single_family"}
@@ -79,22 +72,14 @@ def get_property_for_sale(zipcode):
     response = requests.get(url, headers=headers, params=params)
     #print(response.content)
     return json.loads(response.content.decode('utf-8'))
-
 def get_rental_market_data(zipcode):
    endpoint=f"zipCodes/{zipcode}"
    params={}
    response=send_request(endpoint=endpoint,params=params)
-   #print(response)
-   return response.json()
    print(response)
-   try:
-      return response.json()
-   except:
-      return ''
+   return response.json()
 
 def calculate_rent_adjustment(bedrooms,sqft,baths,delta_rent):
-  if(int(bedrooms)<1):
-     rent_adj=0
   if(int(bedrooms) == 1):
       delta_sqft = delta_rent*0.8/700
       rent_adj = (sqft - 700) * delta_sqft
@@ -118,21 +103,25 @@ def calculate_rent_adjustment(bedrooms,sqft,baths,delta_rent):
       rent_adj += (bedrooms - 5) * (delta_rent * 0.25)
     #print (f"Adjusted rent: {rent_adj} {delta_rent} {bedrooms} {baths} {sqft}")  
   return round(rent_adj, 2)
-
 def derive_rental_estimate(address,bedroom,baths,sqft,rental_list):
-   print(bedroom)
+   #print(bedroom)
    rent_estimate=0
    idx=0
    static_idx=0
    delta_rent=0
+   print(rental_list)
+   max_beds_val=max(rental_list,key=lambda x: x['bedrooms'])
+   max_beds=int(max_beds_val['bedrooms'])
+   min_beds_val=min(rental_list, key=lambda x: x['bedrooms'])
+   min_beds=int(min_beds_val['bedrooms'])
    for i in rental_list:
       idx=idx+1
       if (int(i['bedrooms'])==int(bedroom)):
          break
    idx=idx-1
-   if(int(bedroom) == 1):
+   if(int(bedroom)<=min_beds):
     delta_rent = rental_list[idx+1]['averageRent'] - rental_list[idx]['averageRent']
-   elif(int(bedroom) > 4):
+   elif(int(bedroom) >= max_beds):
     delta_rent = rental_list[idx]['averageRent'] - rental_list[idx-1]['averageRent']
    else:
     delta_rent1 = rental_list[idx]['averageRent'] - rental_list[idx-1]['averageRent']
@@ -140,10 +129,6 @@ def derive_rental_estimate(address,bedroom,baths,sqft,rental_list):
     delta_rent = (delta_rent1 + delta_rent2)/2
    #print(delta_rent)
    rent_estimate = rental_list[idx]['averageRent']
-   print('Bedroom',bedroom)
-   print('Bathroom',baths)
-   print('SQFT',sqft)
-
    rent_estimate += round(calculate_rent_adjustment(int(bedroom), int(sqft),int(baths), float(delta_rent))) 
    #print (f"{address} {idx} {delta_rent} {rent_estimate}")
    return rent_estimate 
@@ -175,17 +160,22 @@ def get_address_line(address, city, state_code, postal_code):
 
 def generate_rental_potentials(zipcode):
   rental_list=[]
-  listings = get_property_for_sale(zipcode)
-  #print (listings)
-  if(listings['status'] == 'OK'): 
-    results = listings['data']['home_search']['results']
-  else:
-    listings = get_property_for_sale_by_location(zipcode)
-    #print(listings)
-    results = listings['listings']
-    #print(listings['message'])
-    #exit(listings['status'])
+#  listings = get_property_for_sale(zipcode)
+#  print (listings['status'])
+#  if(listings['status'] == 'OK'): 
+#    print('Working In If')
+#    results = listings['data']['home_search']['results']
+#  else:
+  print('Working in Else')
+  listings = get_property_for_sale_by_location(zipcode)
+  print('Listings retreived Successfully')
+  #print(listings)
+  results = listings['listings']
+  #print(listings['message'])
+  #exit(listings['status'])
   rdata=get_rental_market_data(zipcode)
+  print('RData retreived successfully')
+  print(rdata)
   for rental in rdata['rentalData']['detailed']:
      decoded_rent={
         'bedrooms':rental['bedrooms'],
@@ -196,18 +186,7 @@ def generate_rental_potentials(zipcode):
      }
      rental_list.append(decoded_rent)
   #print(rental_list)
-     return rental_list,results
-  else:
-     decoded_rent={
-        'bedrooms':0,
-        'averageRent':0,
-        'minRent':0,
-        'maxRent':0,
-        'totalRentals':0
-     }
-     rental_list.append(decoded_rent)
-     return rental_list,results
-
+  return rental_list,results
 def collect_research_params(zipcode,downpayment,interest,propertytax,expense):
     exp_ratio = float(expense)
     down_pmt = float(downpayment)
@@ -225,7 +204,6 @@ def get_positive_cf(cflist):
       if cflist[i]>0:
          return i+1
    return len(cflist)
-
 def get_positive_rroi(rroilist):
    for i in range(len(rroilist)):
       if rroilist[i]>0:
@@ -297,8 +275,6 @@ def analyze_property( incr_exp, incr_inc, incr_val,prop_data):
   #print (pdf)
   return pdf
     
-
-
 def collect_property_data(research,incr_exp,incr_val,incr_inc):
   index = 0
   #print(research)
@@ -310,60 +286,35 @@ def collect_property_data(research,incr_exp,incr_val,incr_inc):
   #print(results)
   down_payment = research['down_payment']
   int_rate = research['interest_rate']
-  print(len(results))
-  
+  print(results[0])
+
   for listing in results:
       address = listing['location']['address']['line']
       city = listing['location']['address']['city']
       state_code = listing['location']['address']['state_code']
-      try:
-       postal_code = listing['location']['address']['postal_code']
-       if postal_code==None:
-          postal_code="00000"
-      except: 
+      postal_code = listing['location']['address']['postal_code']
+      if(postal_code == None): 
         postal_code = "00000"
-      try:
-       sqft = listing['description']['sqft']
-       if sqft==None:
-          sqft=0
-      except:
-        print('SQFT Exception')
+      sqft = listing['description']['sqft']
+      if(sqft == None):
         sqft = 0
-      try:
-       beds = listing['description']['beds']
-       if beds==None:
-          beds=0
-      except:
+      beds = listing['description']['beds']
+      if(beds == None):
         beds = 0
-      try:
-       baths_full = listing['description']['baths_full']
-       if baths_full==None:
-          baths_full=0
-      except:
+      baths_full = listing['description']['baths_full']
+      if(baths_full == None):
         baths_full = 0
-      try:
-       property_type = listing['description']['type']
-       if property_type==None:
-          property_type="Single Family"
-      except:
+      property_type = listing['description']['type']
+      if(property_type == None):
         property_type = "Single Family"
-      try:
-        list_price = listing['list_price']
-        if list_price==None:
-           list_price=0
-      except:
+      list_price = listing['list_price']
+      if(list_price == None):
           list_price = 0
-      try:
-       desc=listing['description']['text']
-       if desc==None:
-          desc=''
-      except:
+      desc=listing['description']['text']
+      if desc==None:
          desc=''
-      try:
-       img_url=listing['primary_photo']['href']
-       if img_url==None:
-          img_url='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png'
-      except:
+      img_url=listing['primary_photo']['href']
+      if img_url==None:
          img_url='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png'
       address_line = get_address_line(address, city, state_code, postal_code)
       #print(f"List price: {list_price}, Down payment: {down_payment}, Interest rate: {int_rate}")
@@ -417,13 +368,10 @@ def collect_property_data(research,incr_exp,incr_val,incr_inc):
       prop_data['cflow_positive']=cpos
       rpos=get_positive_rroi(prop_data['rroi'])
       prop_data['rroi_positive']=rpos
-
       property_data.append(prop_data)
-
       index += 1
   #print(property_data)
   return property_data
-
 def conv_str_to_lst(string):
    noofspaces=string.count(' ')
    for i in range(noofspaces):
@@ -439,7 +387,3 @@ def conv_str_to_lst(string):
       newlist[i]=float(newlist[i])
    #print(len(newlist))
    return newlist
-
-
-
-
