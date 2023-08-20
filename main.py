@@ -4,7 +4,7 @@ import time
 from mortgage import amortization_schedule
 import pandas as pd
 
-API_KEY = "8de5a7ba9cmsh2858fb246877cc3p10d9e6jsnfe5932cb3231"
+API_KEY = "f8afd74a7dmsh8feb825ecf24206p1f7ef5jsnb0b19e15db3b"
 HOST = "realty-mole-property-api.p.rapidapi.com"
 US_HOST = "us-real-estate.p.rapidapi.com"
 US_RE_HOST = "us-real-estate-listings.p.rapidapi.com"
@@ -26,7 +26,7 @@ def send_request(endpoint, params):
         "X-RapidAPI-Key": API_KEY,
         "X-RapidAPI-Host": HOST,
     }
-    print('Calling API Now')
+
     response = requests.get(url, headers=headers, params=params)
     print(response.content)
     return response
@@ -84,6 +84,8 @@ def get_rental_market_data(zipcode):
    endpoint=f"zipCodes/{zipcode}"
    params={}
    response=send_request(endpoint=endpoint,params=params)
+   #print(response)
+   return response.json()
    print(response)
    try:
       return response.json()
@@ -123,19 +125,14 @@ def derive_rental_estimate(address,bedroom,baths,sqft,rental_list):
    idx=0
    static_idx=0
    delta_rent=0
-   print(rental_list)
-   max_beds_val=max(rental_list,key=lambda x: x['bedrooms'])
-   max_beds=int(max_beds_val['bedrooms'])
-   min_beds_val=min(rental_list, key=lambda x: x['bedrooms'])
-   min_beds=int(min_beds_val['bedrooms'])
    for i in rental_list:
       idx=idx+1
       if (int(i['bedrooms'])==int(bedroom)):
          break
    idx=idx-1
-   if(int(bedroom)<=min_beds):
+   if(int(bedroom) == 1):
     delta_rent = rental_list[idx+1]['averageRent'] - rental_list[idx]['averageRent']
-   elif(int(bedroom) >= max_beds):
+   elif(int(bedroom) > 4):
     delta_rent = rental_list[idx]['averageRent'] - rental_list[idx-1]['averageRent']
    else:
     delta_rent1 = rental_list[idx]['averageRent'] - rental_list[idx-1]['averageRent']
@@ -178,22 +175,18 @@ def get_address_line(address, city, state_code, postal_code):
 
 def generate_rental_potentials(zipcode):
   rental_list=[]
-#  listings = get_property_for_sale(zipcode)
-#  print (listings['status'])
-#  if(listings['status'] == 'OK'): 
-#    print('Working In If')
-#    results = listings['data']['home_search']['results']
-#  else:
-  print('Working in Else')
-  listings = get_property_for_sale_by_location(zipcode)
-  print('Listings retreived Successfully')
-  #print(listings)
-  results = listings['listings']
-  #print(listings['message'])
-  #exit(listings['status'])
+  listings = get_property_for_sale(zipcode)
+  #print (listings)
+  if(listings['status'] == 'OK'): 
+    results = listings['data']['home_search']['results']
+  else:
+    listings = get_property_for_sale_by_location(zipcode)
+    #print(listings)
+    results = listings['listings']
+    #print(listings['message'])
+    #exit(listings['status'])
   rdata=get_rental_market_data(zipcode)
-  if rdata!='':
-   for rental in rdata['rentalData']['detailed']:
+  for rental in rdata['rentalData']['detailed']:
      decoded_rent={
         'bedrooms':rental['bedrooms'],
         'averageRent':rental['averageRent'],
