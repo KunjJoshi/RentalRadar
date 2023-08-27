@@ -1,0 +1,46 @@
+.contact-info {
+    color: #000;
+    text-align: center;
+    font-size: 25px;
+    /* font-weight: 00; */
+    line-height: 150%;
+    margin-bottom: 50px;
+}
+
+li input[type="text"]{
+    font-size: 16px;
+}
+
+/* ul li.enquiry input[type="text"] {
+    width: 75%;
+    height: 100px;
+    overflow-wrap: break-word;
+} */
+
+li textarea {
+    width: 75%;
+    font-size: 16px;
+    height: 100px;
+    overflow-wrap: break-word;
+}
+
+ul {
+    list-style-type: none;
+    text-align: left;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .contact-info {
+        font-size: 15px;
+    }
+
+    li textarea {
+        width: 100%;
+        font-size: 16px;
+    }
+    
+}
